@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'Credenciales inválidas'
+                'message' => 'Credenciales incorrectas'
             ], 401);
         }
 
@@ -65,26 +65,26 @@ class AuthController extends Controller
     }
 
     public function refreshToken(Request $request)
-{
-    $request->validate([
-        'token' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'token' => 'required|string',
+        ]);
 
-    $existingToken = $request->user()->tokens()->where('id', $request->token)->first();
+        $existingToken = $request->user()->tokens()->where('id', $request->token)->first();
 
-    if (!$existingToken) {
-        return response()->json(['message' => 'Token inválido'], 401);
+        if (!$existingToken) {
+            return response()->json(['message' => 'Token inválido'], 401);
+        }
+
+        // Opcional: Verificar si el token está cerca de expirar
+        // Aquí asumimos que quieres renovar siempre
+        $existingToken->delete();
+
+        $newToken = $request->user()->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $newToken,
+            'token_type' => 'Bearer',
+        ]);
     }
-
-    // Opcional: Verificar si el token está cerca de expirar
-    // Aquí asumimos que quieres renovar siempre
-    $existingToken->delete();
-
-    $newToken = $request->user()->createToken('auth_token')->plainTextToken;
-
-    return response()->json([
-        'access_token' => $newToken,
-        'token_type' => 'Bearer',
-    ]);
-}
 }
