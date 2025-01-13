@@ -12,7 +12,8 @@ class FormatoController extends Controller
      */
     public function index()
     {
-        return response()->json(Formato::all(), 200);
+        $formatos = Formato::paginate(10);
+        return response()->json($formatos, 200);
     }
 
     /**
