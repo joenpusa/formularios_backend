@@ -40,6 +40,7 @@ class SocialVisita extends Model
         'pre_13',
         'pre_14',
         'pre_15',
+        'pre_16',
         'compromiso_1_desc',
         'compromiso_1_resp',
         'compromiso_1_fecha',
@@ -62,7 +63,13 @@ class SocialVisita extends Model
         'cargo_atiende',
         'perc_gest_social',
         'observaciones',
-        'firstSignature',
-        'secondSignature',
+        'firma1',
+        'firma2',
+        'created_by',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

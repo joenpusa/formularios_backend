@@ -7,7 +7,7 @@ use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\SocialVisitaController;
-
+use App\Http\Controllers\SocialAsistenciaController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -43,5 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::apiResource('social_visitas', SocialVisitaController::class);
+    Route::apiResource('social_asistencias', SocialAsistenciaController::class);
+
+
 
 });
