@@ -9,6 +9,9 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\SocialVisitaController;
 use App\Http\Controllers\SocialAsistenciaController;
 use App\Http\Controllers\SocialVerificacionController;
+use App\Http\Controllers\CtEtapaAlistamientoController;
+
+
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -43,9 +46,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/delete/{id}', [AttachmentController::class, 'destroy']); // Eliminar un adjunto
     });
 
+    // rutas componente social
     Route::apiResource('social_visitas', SocialVisitaController::class);
     Route::apiResource('social_asistencias', SocialAsistenciaController::class);
     Route::apiResource('social_verificacion', SocialVerificacionController::class);
+    // rutas componente tecnico
+    Route::apiResource('ct_etapa_alistamiento', CtEtapaAlistamientoController::class);
 
 
 });
