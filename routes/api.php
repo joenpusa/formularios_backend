@@ -11,6 +11,7 @@ use App\Http\Controllers\SocialAsistenciaController;
 use App\Http\Controllers\SocialVerificacionController;
 use App\Http\Controllers\CtEtapaAlistamientoController;
 use App\Http\Controllers\CtEtapaOperacionController;
+use App\Http\Controllers\CtSeguimientoEtiquetadoController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -51,6 +52,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // rutas componente tecnico
     Route::apiResource('ct_etapa_alistamiento', CtEtapaAlistamientoController::class);
     Route::apiResource('ct_etapa_operaciones', CtEtapaOperacionController::class);
-
+    Route::apiResource('ct_seguimiento_etiquetado', CtSeguimientoEtiquetadoController::class);
 
 });
