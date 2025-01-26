@@ -10,11 +10,9 @@ use App\Http\Controllers\SocialVisitaController;
 use App\Http\Controllers\SocialAsistenciaController;
 use App\Http\Controllers\SocialVerificacionController;
 use App\Http\Controllers\CtEtapaAlistamientoController;
-
-
+use App\Http\Controllers\CtEtapaOperacionController;
 
 Route::post('/login', [AuthController::class, 'login']);
-
 
 // Rutas protegidas
 Route::middleware('auth:sanctum')->group(function () {
@@ -52,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('social_verificacion', SocialVerificacionController::class);
     // rutas componente tecnico
     Route::apiResource('ct_etapa_alistamiento', CtEtapaAlistamientoController::class);
+    Route::apiResource('ct_etapa_operaciones', CtEtapaOperacionController::class);
 
 
 });
