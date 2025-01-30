@@ -14,10 +14,7 @@ use App\Http\Controllers\CtEtapaOperacionController;
 use App\Http\Controllers\CtSeguimientoEtiquetadoController;
 use App\Http\Controllers\CtCaracteristicasProductoController;
 use App\Http\Controllers\CtTomaMuestraController;
-
-
-
-
+use App\Http\Controllers\CtVerificacionMateriaPrimaController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -61,5 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('ct_seguimiento_etiquetado', CtSeguimientoEtiquetadoController::class);
     Route::apiResource('ct_caracteristicas_productos', CtCaracteristicasProductoController::class);
     Route::apiResource('ct_toma_muestras', CtTomaMuestraController::class);
+    Route::apiResource('ct_verificacion_materia_prima', CtVerificacionMateriaPrimaController::class);
+
 
 });
