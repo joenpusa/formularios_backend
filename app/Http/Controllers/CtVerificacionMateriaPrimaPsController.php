@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
-use App\Models\CtVerificacionMateriaPrima;
+use App\Models\CtVerificacionMateriaPrimaPs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Attachment;
 
-class CtVerificacionMateriaPrimaController extends Controller {
+class CtVerificacionMateriaPrimaPsController extends Controller
+{
     public function index() {
-        return response()->json(CtVerificacionMateriaPrima::all());
+        return response()->json(CtVerificacionMateriaPrimaPs::all());
     }
 
     public function store(Request $request) {
@@ -45,7 +47,7 @@ class CtVerificacionMateriaPrimaController extends Controller {
         $data = $request->all();
         $data['created_by'] = Auth::id();
 
-        $registro = CtVerificacionMateriaPrima::create($data);
+        $registro = CtVerificacionMateriaPrimaPs::create($data);
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
@@ -54,7 +56,7 @@ class CtVerificacionMateriaPrimaController extends Controller {
 
                 // Crear el registro en la tabla attachments
                 Attachment::create([
-                    'form_name' => 'ct_verificacion_materia_prima',
+                    'form_name' => 'ct_verificacion_materia_prima_ps',
                     'form_id' => $registro->id,
                     'file_path' => $filePath,
                     'original_name' => $file->getClientOriginalName(),
@@ -69,15 +71,20 @@ class CtVerificacionMateriaPrimaController extends Controller {
         ], 201);
     }
 
-    public function show($id) {
-        return response()->json(CtVerificacionMateriaPrima::findOrFail($id));
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
     }
 
-    public function update(Request $request, $id) {
-        $registro = CtVerificacionMateriaPrima::findOrFail($id);
-        $registro->update($request->all());
-        return response()->json($registro);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
     }
-
 
 }

@@ -213,7 +213,7 @@ class CtSeguimientoEtiquetadoController extends Controller
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 // Guardar el archivo en el directorio correspondiente
-                $filePath = $file->store('seguimientoEtiquetados/' . $ctSeguimientoEtiquetado->id, 'public');
+                $filePath = $file->store('tecnico/seguimientoEtiquetados/' . $ctSeguimientoEtiquetado->id, 'public');
 
                 // Crear el registro en la tabla attachments
                 Attachment::create([
