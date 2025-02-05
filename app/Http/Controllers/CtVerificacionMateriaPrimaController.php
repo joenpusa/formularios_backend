@@ -50,7 +50,7 @@ class CtVerificacionMateriaPrimaController extends Controller {
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 // Guardar el archivo en el directorio correspondiente
-                $filePath = $file->store('tecnico/ct_verificacion_materia_prima_ps/' . $registro->id, 'public');
+                $filePath = $file->store('tecnico/ct_verificacion_materia_prima/' . $registro->id, 'public');
 
                 // Crear el registro en la tabla attachments
                 Attachment::create([

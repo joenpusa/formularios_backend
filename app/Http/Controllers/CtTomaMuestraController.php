@@ -72,7 +72,7 @@ class CtTomaMuestraController extends Controller
 
                 // Crear el registro en la tabla attachments
                 Attachment::create([
-                    'form_name' => 'ct_toma_muestra',
+                    'form_name' => 'ct_toma_muestras',
                     'form_id' => $ctTomaMuestra->id,
                     'file_path' => $filePath,
                     'original_name' => $file->getClientOriginalName(),
