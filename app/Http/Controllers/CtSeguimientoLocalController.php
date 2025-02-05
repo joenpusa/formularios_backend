@@ -74,7 +74,7 @@ class CtSeguimientoLocalController extends Controller
             foreach ($request->file('files') as $file) {
                 $filePath = $file->store('tecnico/ct_seguimiento_local/' . $seguimiento->id, 'public');
                 Attachment::create([
-                    'form_name' => 'ct_seguimiento_local',
+                    'form_name' => 'ct_seguimiento_locales',
                     'form_id' => $seguimiento->id,
                     'file_path' => $filePath,
                     'original_name' => $file->getClientOriginalName(),

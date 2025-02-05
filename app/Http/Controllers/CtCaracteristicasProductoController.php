@@ -106,7 +106,7 @@ class CtCaracteristicasProductoController extends Controller
 
                 // Crear el registro en la tabla attachments
                 Attachment::create([
-                    'form_name' => 'ct_caracteristicas_producto',
+                    'form_name' => 'ct_caracteristicas_productos',
                     'form_id' => $ct_caracteristicas_producto->id,
                     'file_path' => $filePath,
                     'original_name' => $file->getClientOriginalName(),
