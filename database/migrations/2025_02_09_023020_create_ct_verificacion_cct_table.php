@@ -10,17 +10,17 @@ return new class extends Migration
     {
         Schema::create('ct_verificacion_cct', function (Blueprint $table) {
             $table->id();
-            $table->string('etc',100);
-            $table->date('fecha_visita',20)->nullable();
-            $table->string('municipio',10)->nullable();
-            $table->string('institucion',10)->nullable();
-            $table->string('sede',10)->nullable();
+            $table->string('etc',30);
+            $table->date('fecha_visita')->nullable();
+            $table->string('municipio',8)->nullable();
+            $table->string('institucion',8)->nullable();
+            $table->string('sede',8)->nullable();
             $table->time('hora_inicial')->nullable();
             $table->time('hora_final')->nullable();
-            $table->string('tipo_visita')->nullable();
+            $table->string('tipo_visita',20)->nullable();
             $table->string('numero_visita',10)->nullable();
-            $table->string('operador',100)->nullable();
-            $table->string('contrato',100)->nullable();
+            $table->string('operador',80)->nullable();
+            $table->string('contrato',80)->nullable();
             $table->integer('num_beneficiarios')->nullable();
 
             for ($i = 1; $i <= 73; $i++) {
@@ -30,7 +30,7 @@ return new class extends Migration
 
             for ($i = 1; $i <= 5; $i++) {
                 for ($j = 1; $j <= 9; $j++) {
-                    $table->string("tb_verificacion{$i}_{$j}",100)->nullable();
+                    $table->text("tb_verificacion{$i}_{$j}")->nullable();
                 }
             }
 
@@ -41,15 +41,15 @@ return new class extends Migration
             foreach (['proteico', 'leguminosa', 'cereal', 'tuberculos', 'verdura', 'jugo'] as $tipo) {
                 for ($i = 1; $i <= 8; $i++) {
                     if ($i == 1) {
-                        $table->string("{$tipo}{$i}",150)->nullable();
+                        $table->string("{$tipo}{$i}",120)->nullable();
                     } else {
-                        $table->string("{$tipo}{$i}",20)->nullable();
+                        $table->string("{$tipo}{$i}",15)->nullable();
                     }
                 }
             }
 
-            $table->string('cdp')->nullable();
-            $table->string('placa_vehiculo')->nullable();
+            $table->string('cdp',50)->nullable();
+            $table->string('placa_vehiculo',10)->nullable();
             $table->integer('numero_sedes')->nullable();
 
             for ($i = 1; $i <= 4; $i++) {
