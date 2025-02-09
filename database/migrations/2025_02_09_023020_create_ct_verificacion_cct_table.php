@@ -10,17 +10,17 @@ return new class extends Migration
     {
         Schema::create('ct_verificacion_cct', function (Blueprint $table) {
             $table->id();
-            $table->string('etc',30);
+            $table->text('etc');
             $table->date('fecha_visita')->nullable();
-            $table->string('municipio',8)->nullable();
-            $table->string('institucion',8)->nullable();
-            $table->string('sede',8)->nullable();
+            $table->text('municipio')->nullable();
+            $table->text('institucion')->nullable();
+            $table->text('sede')->nullable();
             $table->time('hora_inicial')->nullable();
             $table->time('hora_final')->nullable();
-            $table->string('tipo_visita',20)->nullable();
-            $table->string('numero_visita',10)->nullable();
-            $table->string('operador',80)->nullable();
-            $table->string('contrato',80)->nullable();
+            $table->text('tipo_visita')->nullable();
+            $table->text('numero_visita')->nullable();
+            $table->text('operador')->nullable();
+            $table->text('contrato')->nullable();
             $table->integer('num_beneficiarios')->nullable();
 
             for ($i = 1; $i <= 73; $i++) {
@@ -41,9 +41,9 @@ return new class extends Migration
             foreach (['proteico', 'leguminosa', 'cereal', 'tuberculos', 'verdura', 'jugo'] as $tipo) {
                 for ($i = 1; $i <= 8; $i++) {
                     if ($i == 1) {
-                        $table->string("{$tipo}{$i}",120)->nullable();
+                        $table->text("{$tipo}{$i}")->nullable();
                     } else {
-                        $table->string("{$tipo}{$i}",15)->nullable();
+                        $table->text("{$tipo}{$i}")->nullable();
                     }
                 }
             }
@@ -53,7 +53,7 @@ return new class extends Migration
             $table->integer('numero_sedes')->nullable();
 
             for ($i = 1; $i <= 4; $i++) {
-                $table->string("nombre{$i}")->nullable();
+                $table->text("nombre{$i}")->nullable();
                 $table->time("hora_salida{$i}")->nullable();
                 $table->float("temperatura_salida{$i}")->nullable();
                 $table->time("hora_llegada{$i}")->nullable();
