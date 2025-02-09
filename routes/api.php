@@ -18,6 +18,8 @@ use App\Http\Controllers\CtVerificacionMateriaPrimaController;
 use App\Http\Controllers\CtVerificacionMateriaPrimaPsController;
 use App\Http\Controllers\CtSeguimientoLocalController;
 use App\Http\Controllers\PqrController;
+use App\Http\Controllers\CtVerificacionCctController;
+use App\Http\Controllers\CtVerificacionModalidadRpsController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -64,6 +66,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('ct_verificacion_materia_prima', CtVerificacionMateriaPrimaController::class);
     Route::apiResource('ct_verificacion_materia_prima_ps', CtVerificacionMateriaPrimaPsController::class);
     Route::apiResource('ct_seguimientos_locales', CtSeguimientoLocalController::class);
+    Route::apiResource('ct_verificacion_cct', CtVerificacionCctController::class);
+    Route::apiResource('ct_verificacion_modalidad_rps', CtVerificacionModalidadRpsController::class);
     // tutas generales
     Route::apiResource('pqrs', PqrController::class);
 });
