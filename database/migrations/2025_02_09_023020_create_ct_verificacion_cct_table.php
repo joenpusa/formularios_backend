@@ -68,10 +68,10 @@ return new class extends Migration
             $table->text('firma2')->nullable();
 
             foreach (['apoyo', 'atiende'] as $persona) {
-                $table->string("nombre_{$persona}",120)->nullable();
-                $table->string("cedula_{$persona}",30)->nullable();
-                $table->string("cargo_{$persona}",50)->nullable();
-                $table->string("telefono_{$persona}",50)->nullable();
+                $table->text("nombre_{$persona}",120)->nullable();
+                $table->text("cedula_{$persona}",30)->nullable();
+                $table->text("cargo_{$persona}",50)->nullable();
+                $table->text("telefono_{$persona}",50)->nullable();
             }
 
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
