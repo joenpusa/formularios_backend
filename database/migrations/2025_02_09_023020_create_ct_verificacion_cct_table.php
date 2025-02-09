@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('num_beneficiarios')->nullable();
 
             for ($i = 1; $i <= 73; $i++) {
-                $table->text("pre_{$i}", 10)->nullable();
-                $table->text("pre_{$i}_obs",100)->nullable();
+                $table->text("pre_{$i}")->nullable();
+                $table->text("pre_{$i}_obs")->nullable();
             }
 
             for ($i = 1; $i <= 5; $i++) {
@@ -68,10 +68,10 @@ return new class extends Migration
             $table->text('firma2')->nullable();
 
             foreach (['apoyo', 'atiende'] as $persona) {
-                $table->text("nombre_{$persona}",120)->nullable();
-                $table->text("cedula_{$persona}",30)->nullable();
-                $table->text("cargo_{$persona}",50)->nullable();
-                $table->text("telefono_{$persona}",50)->nullable();
+                $table->text("nombre_{$persona}")->nullable();
+                $table->text("cedula_{$persona}")->nullable();
+                $table->text("cargo_{$persona}")->nullable();
+                $table->text("telefono_{$persona}")->nullable();
             }
 
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
