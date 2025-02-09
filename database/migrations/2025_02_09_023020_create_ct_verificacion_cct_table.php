@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('num_beneficiarios')->nullable();
 
             for ($i = 1; $i <= 73; $i++) {
-                $table->string("pre_{$i}", 10)->nullable();
+                $table->text("pre_{$i}", 10)->nullable();
                 $table->text("pre_{$i}_obs",100)->nullable();
             }
 
