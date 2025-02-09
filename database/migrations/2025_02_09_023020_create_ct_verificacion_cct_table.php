@@ -77,6 +77,9 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
+
+        // Forzar ROW_FORMAT=DYNAMIC
+        \DB::statement('ALTER TABLE ct_verificacion_cct ROW_FORMAT=DYNAMIC;');
     }
 
     public function down(): void
