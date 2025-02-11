@@ -17,7 +17,7 @@ class CtVerificacionModalidadRps extends Model
         'operador', 'contrato', 'observaciones', 'fecha_ultima_fumiga', 'fecha_ultima_limpieza',
         'fecha_ultima_visita', 'concepto_emitido', 'nombre_apoyo', 'cedula_apoyo',
         'cargo_apoyo', 'telefono_apoyo', 'nombre_atiende', 'cedula_atiende',
-        'cargo_atiende', 'telefono_atiende', 'firma1', 'firma2', 'user_id',
+        'cargo_atiende', 'telefono_atiende', 'firma1', 'firma2', 'created_by',
         'condi_1', 'condi_1_obs', 'condi_2', 'condi_2_obs', 'condi_3', 'condi_3_obs',
         'condi_4', 'condi_4_obs', 'condi_5', 'condi_5_obs', 'condi_6', 'condi_6_obs',
         'condi_7', 'condi_7_obs', 'condi_8', 'condi_8_obs', 'condi_9', 'condi_9_obs',

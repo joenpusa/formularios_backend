@@ -265,7 +265,7 @@ class CtVerificacionModalidadRpsController extends Controller
             'jugo8' => 'nullable|string',
         ]);
 
-        $data['user_id'] = Auth::id();
+        $data['created_by'] = Auth::id();
 
         $registro = CtVerificacionModalidadRps::create($data);
 
