@@ -21,6 +21,7 @@ use App\Http\Controllers\PqrController;
 use App\Http\Controllers\CtVerificacionCctController;
 use App\Http\Controllers\CtVerificacionModalidadRpsController;
 use App\Http\Controllers\CtVerificacionRotuladoRiController;
+use App\Http\Controllers\CtVerificacionModalidadRiController;
 
 
 
@@ -72,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('ct_verificacion_cct', CtVerificacionCctController::class);
     Route::apiResource('ct_verificacion_modalidad_rps', CtVerificacionModalidadRpsController::class);
     Route::apiResource('ct_verificacion_rotulado_ri', CtVerificacionRotuladoRiController::class);
+    Route::apiResource('ct_verificacion_modalidad_ri', CtVerificacionModalidadRiController::class);
     // tutas generales
     Route::apiResource('pqrs', PqrController::class);
 });
