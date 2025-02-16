@@ -23,7 +23,7 @@ use App\Http\Controllers\CtVerificacionModalidadRpsController;
 use App\Http\Controllers\CtVerificacionRotuladoRiController;
 use App\Http\Controllers\CtVerificacionModalidadRiController;
 use App\Http\Controllers\CtSeguimientoRotuladoController;
-
+use App\Http\Controllers\ReporteController;
 
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -80,4 +80,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('ct_seguimiento_rotulado', CtSeguimientoRotuladoController::class);
     // tutas generales
     Route::apiResource('pqrs', PqrController::class);
+    // rutas para reportes
+    Route::post('/reporte/datos', [ReporteController::class, 'obtenerDatos']);
+    Route::post('/reporte/excel', [ReporteController::class, 'generarExcel']);
+
 });
