@@ -14,6 +14,7 @@ class CtVerificacionModalidadRi extends Model
     protected $fillable = [
         'etc',
         'municipio',
+        'fecha_visita',
         'hora_inicial',
         'hora_final',
         'institucion',

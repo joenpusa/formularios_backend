@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Rep;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\SocialVisita;
 use App\Models\SocialVerificacion;
 use App\Models\SocialAsistencia;
@@ -19,10 +21,12 @@ use App\Models\CtVerificacionModalidadRi;
 use App\Models\CtSeguimientoEtiquetado;
 use App\Models\CtCaracteristicasProducto;
 use App\Models\CtTomaMuestra;
+
 use App\Models\CtEtapaAlistamiento;
 use App\Models\CtEtapaOperacion;
 use App\Models\CtSeguimientoLocal;
 use App\Models\CtSeguimientoRotulado;
+
 use App\Models\Pqr;
 
 
@@ -30,21 +34,386 @@ class ReporteController extends Controller
 {
     public function obtenerDatos(Request $request)
     {
+        // Validar las fechas recibidas
+        $request->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+        ]);
+
+        $fechaInicio = $request->fecha_inicio;
+        $fechaFin = $request->fecha_fin;
+        $municipioId = $request->municipio_id; // Puede ser opcional
+        $usuarioId = $request->usuario_id; // Puede ser opcional
+
+        // Construir la primera consulta con JOIN
+        $query1 = SocialVisita::select(
+                'municipios.nombre as municipio',
+                'instituciones.nombre as institucion',
+                'users.name as creado_por',
+                'social_visitas.fechaVisita as fecha_visita',
+                'social_visitas.id',
+                DB::raw('"social_visita" as tipo_reporte')
+            )
+            ->join('municipios', 'social_visitas.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'social_visitas.institucion', '=', 'instituciones.id')
+            ->join('users', 'social_visitas.created_by', '=', 'users.id')
+            ->whereBetween('social_visitas.fechaVisita', [$fechaInicio, $fechaFin]);
+
+        // Aplicar filtros opcionales
+        if (!empty($municipioId)) {
+            $query1->where('social_visitas.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query1->where('social_visitas.created_by', $usuarioId);
+        }
+
+        // Segunda consulta
+        $query2 = SocialVerificacion::select(
+                'municipios.nombre as municipio',
+                'instituciones.nombre as institucion',
+                'users.name as creado_por',
+                'social_verificaciones.fecha_visita',
+                'social_verificaciones.id',
+                DB::raw('"social_verificaciones" as tipo_reporte')
+            )
+            ->join('municipios', 'social_verificaciones.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'social_verificaciones.institucion', '=', 'instituciones.id')
+            ->join('users', 'social_verificaciones.created_by', '=', 'users.id')
+            ->whereBetween('social_verificaciones.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query1);
+
+        if (!empty($municipioId)) {
+            $query2->where('social_verificaciones.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query2->where('social_verificaciones.created_by', $usuarioId);
+        }
+
+        // Tercera consulta
+        $query3 = SocialAsistencia::select(
+                'municipios.nombre as municipio',
+                'instituciones.nombre as institucion',
+                'users.name as creado_por',
+                'social_asistencias.fecha_visita',
+                'social_asistencias.id',
+                DB::raw('"social_asistencias" as tipo_reporte')
+
+            )
+            ->join('municipios', 'social_asistencias.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'social_asistencias.institucion', '=', 'instituciones.id')
+            ->join('users', 'social_asistencias.created_by', '=', 'users.id')
+            ->whereBetween('social_asistencias.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query2);
+
+        if (!empty($municipioId)) {
+            $query3->where('social_asistencias.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query3->where('social_asistencias.created_by', $usuarioId);
+        }
+
+        $query4 = CtVerificacionMateriaPrima::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_verificacion_materia_prima.fecha_visita',
+            'ct_verificacion_materia_prima.id',
+            DB::raw('"ct_verificacion_materia_prima" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_verificacion_materia_prima.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_verificacion_materia_prima.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_verificacion_materia_prima.created_by', '=', 'users.id')
+        ->whereBetween('ct_verificacion_materia_prima.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query3);
+
+        if (!empty($municipioId)) {
+            $query4->where('ct_verificacion_materia_prima.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query4->where('ct_verificacion_materia_prima.created_by', $usuarioId);
+        }
+
+        $query5 = CtVerificacionMateriaPrimaPs::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_verificacion_materia_prima_ps.fecha_visita',
+            'ct_verificacion_materia_prima_ps.id',
+            DB::raw('"ct_verificacion_materia_prima_ps" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_verificacion_materia_prima_ps.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_verificacion_materia_prima_ps.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_verificacion_materia_prima_ps.created_by', '=', 'users.id')
+        ->whereBetween('ct_verificacion_materia_prima_ps.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query4);
+
+        if (!empty($municipioId)) {
+            $query5->where('ct_verificacion_materia_prima_ps.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query5->where('ct_verificacion_materia_prima_ps.created_by', $usuarioId);
+        }
+
+        $query6 = CtVerificacionCct::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_verificacion_cct.fecha_visita',
+            'ct_verificacion_cct.id',
+            DB::raw('"ct_verificacion_cct" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_verificacion_cct.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_verificacion_cct.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_verificacion_cct.created_by', '=', 'users.id')
+        ->whereBetween('ct_verificacion_cct.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query5);
+
+        if (!empty($municipioId)) {
+            $query6->where('ct_verificacion_cct.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query6->where('ct_verificacion_cct.created_by', $usuarioId);
+        }
+
+        $query7 = CtVerificacionModalidadRps::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_verificacion_modalidad_rps.fecha_visita',
+            'ct_verificacion_modalidad_rps.id',
+            DB::raw('"ct_verificacion_modalidad_rps" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_verificacion_modalidad_rps.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_verificacion_modalidad_rps.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_verificacion_modalidad_rps.created_by', '=', 'users.id')
+        ->whereBetween('ct_verificacion_modalidad_rps.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query6);
+
+        if (!empty($municipioId)) {
+            $query7->where('ct_verificacion_modalidad_rps.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query7->where('ct_verificacion_modalidad_rps.created_by', $usuarioId);
+        }
+
+        $query8 = CtVerificacionRotuladoRi::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_verificacion_rotulado_ri.fecha_visita',
+            'ct_verificacion_rotulado_ri.id',
+            DB::raw('"ct_verificacion_rotulado_ri" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_verificacion_rotulado_ri.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_verificacion_rotulado_ri.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_verificacion_rotulado_ri.created_by', '=', 'users.id')
+        ->whereBetween('ct_verificacion_rotulado_ri.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query7);
+
+        if (!empty($municipioId)) {
+            $query8->where('ct_verificacion_rotulado_ri.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query8->where('ct_verificacion_rotulado_ri.created_by', $usuarioId);
+        }
+
+        $query9 = CtVerificacionModalidadRi::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_verificacion_modalidad_ri.fecha_visita',
+            'ct_verificacion_modalidad_ri.id',
+            DB::raw('"ct_verificacion_modalidad_ri" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_verificacion_modalidad_ri.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_verificacion_modalidad_ri.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_verificacion_modalidad_ri.created_by', '=', 'users.id')
+        ->whereBetween('ct_verificacion_modalidad_ri.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query8);
+
+        if (!empty($municipioId)) {
+            $query9->where('ct_verificacion_modalidad_ri.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query9->where('ct_verificacion_modalidad_ri.created_by', $usuarioId);
+        }
+
+        $query10 = CtSeguimientoEtiquetado::select(
+            'municipios.nombre as municipio',
+            DB::raw('"NO APLICA" as institucion'),
+            'users.name as creado_por',
+            'ct_seguimiento_etiquetados.fecha_visita',
+            'ct_seguimiento_etiquetados.id',
+            DB::raw('"ct_seguimiento_etiquetados" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_seguimiento_etiquetados.municipio', '=', 'municipios.id')
+        ->join('users', 'ct_seguimiento_etiquetados.created_by', '=', 'users.id')
+        ->whereBetween('ct_seguimiento_etiquetados.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query9);
+
+        if (!empty($municipioId)) {
+            $query10->where('ct_seguimiento_etiquetados.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query10->where('ct_seguimiento_etiquetados.created_by', $usuarioId);
+        }
+
+        $query11 = CtCaracteristicasProducto::select(
+            'municipios.nombre as municipio',
+            DB::raw('"NO APLICA" as institucion'),
+            'users.name as creado_por',
+            'ct_caracteristicas_productos.fecha_visita',
+            'ct_caracteristicas_productos.id',
+            DB::raw('"ct_caracteristicas_productos" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_caracteristicas_productos.municipio', '=', 'municipios.id')
+        ->join('users', 'ct_caracteristicas_productos.created_by', '=', 'users.id')
+        ->whereBetween('ct_caracteristicas_productos.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query10);
+
+        if (!empty($municipioId)) {
+            $query11->where('ct_caracteristicas_productos.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query11->where('ct_caracteristicas_productos.created_by', $usuarioId);
+        }
+
+        $query12 = CtTomaMuestra::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_toma_muestras.fecha_visita',
+            'ct_toma_muestras.id',
+            DB::raw('"ct_toma_muestras" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_toma_muestras.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_toma_muestras.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_toma_muestras.created_by', '=', 'users.id')
+        ->whereBetween('ct_toma_muestras.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query11);
+
+        if (!empty($municipioId)) {
+            $query12->where('ct_toma_muestras.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query12->where('ct_toma_muestras.created_by', $usuarioId);
+        }
+
+        $query13 = CtEtapaAlistamiento::select(
+            'municipios.nombre as municipio',
+            DB::raw('"NO APLICA" as institucion'),
+            'users.name as creado_por',
+            'ct_etapa_alistamiento.fecha_visita',
+            'ct_etapa_alistamiento.id',
+            DB::raw('"ct_etapa_alistamiento" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_etapa_alistamiento.municipio', '=', 'municipios.id')
+        ->join('users', 'ct_etapa_alistamiento.created_by', '=', 'users.id')
+        ->whereBetween('ct_etapa_alistamiento.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query12);
+
+        if (!empty($municipioId)) {
+            $query13->where('ct_etapa_alistamiento.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query13->where('ct_etapa_alistamiento.created_by', $usuarioId);
+        }
+
+        $query14 = CtEtapaOperacion::select(
+            'municipios.nombre as municipio',
+            DB::raw('"NO APLICA" as institucion'),
+            'users.name as creado_por',
+            'ct_etapa_operaciones.fecha_visita',
+            'ct_etapa_operaciones.id',
+            DB::raw('"ct_etapa_operaciones" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_etapa_operaciones.municipio', '=', 'municipios.id')
+        ->join('users', 'ct_etapa_operaciones.created_by', '=', 'users.id')
+        ->whereBetween('ct_etapa_operaciones.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query13);
+
+        if (!empty($municipioId)) {
+            $query14->where('ct_etapa_operaciones.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query14->where('ct_etapa_operaciones.created_by', $usuarioId);
+        }
+
+        $query15 = CtSeguimientoLocal::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_seguimiento_locales.fecha_visita',
+            'ct_seguimiento_locales.id',
+            DB::raw('"ct_seguimiento_locales" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_seguimiento_locales.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_seguimiento_locales.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_seguimiento_locales.created_by', '=', 'users.id')
+        ->whereBetween('ct_seguimiento_locales.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query14);
+
+        if (!empty($municipioId)) {
+            $query15->where('ct_seguimiento_locales.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query15->where('ct_seguimiento_locales.created_by', $usuarioId);
+        }
+
+        $query16 = CtSeguimientoRotulado::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'ct_seguimiento_rotulado.fecha_visita',
+            'ct_seguimiento_rotulado.id',
+            DB::raw('"ct_seguimiento_rotulado" as tipo_reporte')
+
+        )
+        ->join('municipios', 'ct_seguimiento_rotulado.municipio', '=', 'municipios.id')
+        ->join('instituciones', 'ct_seguimiento_rotulado.institucion', '=', 'instituciones.id')
+        ->join('users', 'ct_seguimiento_rotulado.created_by', '=', 'users.id')
+        ->whereBetween('ct_seguimiento_rotulado.fecha_visita', [$fechaInicio, $fechaFin])
+        ->union($query15);
+
+        if (!empty($municipioId)) {
+            $query16->where('ct_seguimiento_rotulado.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query16->where('ct_seguimiento_rotulado.created_by', $usuarioId);
+        }
+
+        // Obtener los resultados ordenados y con paginación
+        $registros = $query16->orderBy('fecha_visita', 'desc')->get();
+
+        return response()->json($registros);
+    }
+
+    public function generarExcel(Request $request)
+    {
         $tipo = $request->input('tipo');
 
         if (!in_array($tipo, ['usuarios', 'ventas', 'productos'])) {
             return response()->json(['error' => 'Tipo de reporte inválido'], 400);
         }
 
-        $data = $this->getData($tipo);
+        $fileName = "Reporte_{$tipo}_" . date('Ymd_His') . ".xlsx";
 
-        return response()->json([
-            'success' => true,
-            'data' => $data
-        ]);
+        return Excel::download(new ReporteExport($tipo), $fileName);
     }
 
-    public function generarExcel(Request $request)
+    public function generarIndividual(Request $request)
     {
         $tipo = $request->input('tipo');
 

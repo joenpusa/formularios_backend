@@ -21,6 +21,7 @@ class CtVerificacionModalidadRiController extends Controller
         $data = $request->validate([
             'etc' => 'nullable|string',
             'municipio' => 'nullable|string',
+            'fecha_visita' => 'nullable|date',
             'hora_inicial' => 'nullable|date_format:H:i',
             'hora_final' => 'nullable|date_format:H:i',
             'institucion' => 'nullable|string',

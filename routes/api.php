@@ -83,5 +83,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // rutas para reportes
     Route::post('/reporte/datos', [ReporteController::class, 'obtenerDatos']);
     Route::post('/reporte/excel', [ReporteController::class, 'generarExcel']);
+    Route::post('/reporte/individual', [ReporteController::class, 'generarIndividual']);
 
 });
