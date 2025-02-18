@@ -99,4 +99,15 @@ class CtCaracteristicasProducto extends Model
         'filas_cerdo' => 'array',
         'filas_pollo' => 'array',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'municipio');
+    }
+
+
 }
