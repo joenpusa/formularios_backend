@@ -96,4 +96,19 @@ class CtVerificacionModalidadRi extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'municipio');
+    }
+
+    public function institucion()
+    {
+        return $this->belongsTo(Institucion::class, 'institucion');
+    }
+
+    public function sede()
+    {
+        return $this->belongsTo(Sede::class, 'sede');
+    }
 }

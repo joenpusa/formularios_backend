@@ -56,4 +56,21 @@ class CtTomaMuestra extends Model
         'filas' => 'array',
         'fecha_visita' => 'date',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'municipio');
+    }
+
+    public function institucion()
+    {
+        return $this->belongsTo(Institucion::class, 'institucion');
+    }
+
+
 }

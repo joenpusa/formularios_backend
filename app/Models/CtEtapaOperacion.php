@@ -57,4 +57,16 @@ class CtEtapaOperacion extends Model
         }
         return array_merge(parent::getFillable(), $preFields);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'municipio');
+    }
+
+
 }

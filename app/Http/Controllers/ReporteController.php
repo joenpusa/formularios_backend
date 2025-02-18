@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Rep;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Schema;
 
 use App\Models\SocialVisita;
 use App\Models\SocialVerificacion;
@@ -415,15 +417,90 @@ class ReporteController extends Controller
 
     public function generarIndividual(Request $request)
     {
-        $tipo = $request->input('tipo');
+        try {
+            // Validar los datos del request
+            $request->validate([
+                'tipo_reporte' => 'required|string',
+                'id' => 'required|integer'
+            ]);
 
-        if (!in_array($tipo, ['usuarios', 'ventas', 'productos'])) {
-            return response()->json(['error' => 'Tipo de reporte inválido'], 400);
+            $tipoReporte = $request->input('tipo_reporte');
+            $id = $request->input('id');
+
+            // Definir las tablas y modelos disponibles
+            $modelos = [
+                'ct_seguimiento_rotulado' => CtSeguimientoRotulado::class,
+                'ct_etapa_alistamiento' => CtEtapaAlistamiento::class,
+                'ct_verificacion_materia_prima' => CtVerificacionMateriaPrima::class,
+                'ct_verificacion_modalidad_rps' => CtVerificacionModalidadRps::class,
+                'ct_verificacion_rotulado_ri' => CtVerificacionRotuladoRi::class,
+                'ct_verificacion_modalidad_ri' => CtVerificacionModalidadRi::class,
+                'pqr' => Pqr::class,
+                'social_visitas' => SocialVisita::class,
+                'social_asistencias' => SocialAsistencia::class,
+                'social_verificacion' => SocialVerificacion::class,
+                'ct_verificacion_materia_prima_ps' => CtVerificacionMateriaPrimaPs::class,
+                'ct_verificacion_cct' => CtVerificacionCct::class,
+                'ct_seguimiento_etiquetado' => CtSeguimientoEtiquetado::class,
+                'ct_caracteristicas_productos' => CtCaracteristicasProducto::class,
+                'ct_toma_muestras' => CtTomaMuestra::class,
+                'ct_etapa_operaciones' => CtEtapaOperacion::class,
+                'ct_seguimiento_local' => CtSeguimientoLocal::class,
+            ];
+
+            // Verificar si el tipo de reporte es válido
+            if (!array_key_exists($tipoReporte, $modelos)) {
+                return response()->json([
+                    'message' => 'Tipo de reporte inválido'
+                ], 400);
+            }
+
+            // Obtener el modelo correspondiente
+            $modelo = $modelos[$tipoReporte];
+
+            // Obtener las relaciones del modelo
+            $relaciones = [];
+
+            if (Schema::hasColumn((new $modelo)->getTable(), 'municipio')) {
+                $relaciones[] = 'municipio';
+            }
+            if (Schema::hasColumn((new $modelo)->getTable(), 'institucion')) {
+                $relaciones[] = 'institucion';
+            }
+            if (Schema::hasColumn((new $modelo)->getTable(), 'sede')) {
+                $relaciones[] = 'sede';
+            }
+
+            // Consultar el registro con sus relaciones (si las tiene)
+            $registro = count($relaciones) > 0
+                ? $modelo::with($relaciones)->find($id)
+                : $modelo::find($id);
+
+            // Validar si se encontró el registro
+            if (!$registro) {
+                return response()->json([
+                    'message' => 'Registro no encontrado'
+                ], 404);
+            }
+
+            // Seleccionar la vista según el tipo de reporte
+            $vista = "export.{$tipoReporte}_pdf";
+
+            // Generar el PDF
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($vista, compact('registro'));
+
+            $pdfContent = $pdf->output();
+
+            return response($pdfContent, 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', "attachment; filename={$tipoReporte}_{$id}.pdf");
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error al generar el PDF',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $fileName = "Reporte_{$tipo}_" . date('Ymd_His') . ".xlsx";
-
-        return Excel::download(new ReporteExport($tipo), $fileName);
     }
 
     private function getData($tipo)
