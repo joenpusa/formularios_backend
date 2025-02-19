@@ -57,7 +57,7 @@
                     <td>ETC</td>
                     <td>{{ $registro->etc }}</td>
                     <td>Fecha de la visita</td>
-                    <td>{{ $registro->fecha_visita }}</td>
+                    <td>{{ $registro->fechaVisita }}</td>
                     <td>Municipio</td>
                     <td>{{ $registro->municipio }}</td>
                     <td rowspan="2">Hora de la visita</td>

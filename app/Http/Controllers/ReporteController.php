@@ -44,8 +44,8 @@ class ReporteController extends Controller
 
         $fechaInicio = $request->fecha_inicio;
         $fechaFin = $request->fecha_fin;
-        $municipioId = $request->municipio_id; // Puede ser opcional
-        $usuarioId = $request->usuario_id; // Puede ser opcional
+        $municipioId = $request->municipio; // Puede ser opcional
+        $usuarioId = $request->usuario; // Puede ser opcional
 
         // Construir la primera consulta con JOIN
         $query1 = SocialVisita::select(
@@ -54,7 +54,7 @@ class ReporteController extends Controller
                 'users.name as creado_por',
                 'social_visitas.fechaVisita as fecha_visita',
                 'social_visitas.id',
-                DB::raw('"social_visita" as tipo_reporte')
+                DB::raw('"social_visitas" as tipo_reporte')
             )
             ->join('municipios', 'social_visitas.municipio', '=', 'municipios.id')
             ->join('instituciones', 'social_visitas.institucion', '=', 'instituciones.id')
@@ -62,7 +62,7 @@ class ReporteController extends Controller
             ->whereBetween('social_visitas.fechaVisita', [$fechaInicio, $fechaFin]);
 
         // Aplicar filtros opcionales
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query1->where('social_visitas.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -84,8 +84,8 @@ class ReporteController extends Controller
             ->whereBetween('social_verificaciones.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query1);
 
-        if (!empty($municipioId)) {
-            $query2->where('social_verificaciones.municipio', $municipioId);
+            if (is_numeric($municipioId)) {
+                $query2->where('social_verificaciones.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
             $query2->where('social_verificaciones.created_by', $usuarioId);
@@ -107,8 +107,8 @@ class ReporteController extends Controller
             ->whereBetween('social_asistencias.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query2);
 
-        if (!empty($municipioId)) {
-            $query3->where('social_asistencias.municipio', $municipioId);
+            if (is_numeric($municipioId)) {
+                $query3->where('social_asistencias.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
             $query3->where('social_asistencias.created_by', $usuarioId);
@@ -129,7 +129,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_verificacion_materia_prima.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query3);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query4->where('ct_verificacion_materia_prima.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -151,7 +151,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_verificacion_materia_prima_ps.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query4);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query5->where('ct_verificacion_materia_prima_ps.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -173,7 +173,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_verificacion_cct.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query5);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query6->where('ct_verificacion_cct.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -195,7 +195,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_verificacion_modalidad_rps.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query6);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query7->where('ct_verificacion_modalidad_rps.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -217,7 +217,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_verificacion_rotulado_ri.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query7);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query8->where('ct_verificacion_rotulado_ri.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -239,7 +239,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_verificacion_modalidad_ri.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query8);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query9->where('ct_verificacion_modalidad_ri.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -260,7 +260,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_seguimiento_etiquetados.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query9);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query10->where('ct_seguimiento_etiquetados.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -281,7 +281,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_caracteristicas_productos.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query10);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query11->where('ct_caracteristicas_productos.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -324,7 +324,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_etapa_alistamiento.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query12);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query13->where('ct_etapa_alistamiento.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -345,7 +345,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_etapa_operaciones.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query13);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query14->where('ct_etapa_operaciones.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -367,7 +367,7 @@ class ReporteController extends Controller
         ->whereBetween('ct_seguimiento_locales.fecha_visita', [$fechaInicio, $fechaFin])
         ->union($query14);
 
-        if (!empty($municipioId)) {
+        if (is_numeric($municipioId)) {
             $query15->where('ct_seguimiento_locales.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
@@ -438,14 +438,14 @@ class ReporteController extends Controller
                 'pqr' => Pqr::class,
                 'social_visitas' => SocialVisita::class,
                 'social_asistencias' => SocialAsistencia::class,
-                'social_verificacion' => SocialVerificacion::class,
+                'social_verificaciones' => SocialVerificacion::class,
                 'ct_verificacion_materia_prima_ps' => CtVerificacionMateriaPrimaPs::class,
                 'ct_verificacion_cct' => CtVerificacionCct::class,
                 'ct_seguimiento_etiquetado' => CtSeguimientoEtiquetado::class,
                 'ct_caracteristicas_productos' => CtCaracteristicasProducto::class,
                 'ct_toma_muestras' => CtTomaMuestra::class,
                 'ct_etapa_operaciones' => CtEtapaOperacion::class,
-                'ct_seguimiento_local' => CtSeguimientoLocal::class,
+                'ct_seguimiento_locales' => CtSeguimientoLocal::class,
             ];
 
             // Verificar si el tipo de reporte es válido
