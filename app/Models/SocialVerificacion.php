@@ -45,10 +45,6 @@ class SocialVerificacion extends Model
         return $this->belongsTo(Institucion::class, 'institucion');
     }
 
-    public function sede()
-    {
-        return $this->belongsTo(Sede::class, 'sede');
-    }
     protected $casts = [
         'files' => 'array',
     ];
