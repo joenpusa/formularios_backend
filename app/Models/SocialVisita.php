@@ -73,17 +73,17 @@ class SocialVisita extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function municipio()
+    public function data_municipio()
     {
         return $this->belongsTo(Municipio::class, 'municipio');
     }
 
-    public function institucion()
+    public function data_institucion()
     {
         return $this->belongsTo(Institucion::class, 'institucion');
     }
 
-    public function sede()
+    public function data_sede()
     {
         return $this->belongsTo(Sede::class, 'sede');
     }

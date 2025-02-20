@@ -462,13 +462,13 @@ class ReporteController extends Controller
             $relaciones = [];
 
             if (Schema::hasColumn((new $modelo)->getTable(), 'municipio')) {
-                $relaciones[] = 'municipio';
+                $relaciones[] = 'data_municipio';
             }
             if (Schema::hasColumn((new $modelo)->getTable(), 'institucion')) {
-                $relaciones[] = 'institucion';
+                $relaciones[] = 'data_institucion';
             }
             if (Schema::hasColumn((new $modelo)->getTable(), 'sede')) {
-                $relaciones[] = 'sede';
+                $relaciones[] = 'data_sede';
             }
 
             // Consultar el registro con sus relaciones (si las tiene)
