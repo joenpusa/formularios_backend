@@ -19,7 +19,7 @@ class CtSeguimientoRotulado extends Model
     ];
 
     protected $casts = [
-        'filas' => 'json',
+        'filas' => 'array',
     ];
 
     public function user()
