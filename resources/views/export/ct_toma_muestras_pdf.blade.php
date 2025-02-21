@@ -9,6 +9,13 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 11px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        body {
+            font-size: 11px;
         }
 
         th,

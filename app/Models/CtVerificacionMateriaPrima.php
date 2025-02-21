@@ -44,7 +44,7 @@ class CtVerificacionMateriaPrima extends Model {
         'hora_inicial' => 'datetime',
         'hora_final' => 'datetime',
         'files' => 'array',
-        'filas' => 'json'
+        'filas' => 'array'
     ];
 
     public function user()

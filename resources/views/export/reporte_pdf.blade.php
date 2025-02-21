@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte PDF</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            font-size: 11px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        body {
+            font-size: 11px;
         }
 
         th,
