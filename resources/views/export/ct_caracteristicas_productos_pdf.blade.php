@@ -9,6 +9,13 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 11px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        body {
+            font-size: 11px;
         }
 
         th,
@@ -59,18 +66,18 @@
                     <td>Fecha de la visita</td>
                     <td>{{ $registro->fecha_visita }}</td>
                     <td>Municipio</td>
-                    <td>{{ $registro->municipio }}</td>
+                    <td>{{ $registro->data_municipio->nombre }}</td>
                     <td rowspan="2">Hora de la visita</td>
                     <td>Inicial</td>
-                    <td>{{ $registro->hora_inicial }}</td>
+                    <td>{{ $registro->hora_inicio }}</td>
                 </tr>
                 <tr>
                     <td>Institución Educativa</td>
-                    <td colspan="2">{{ $registro->institucion }}</td>
+                    <td colspan="2">{{ $registro->data_institucion->nombre }}</td>
                     <td>Sede Educativa</td>
-                    <td colspan="2">{{ $registro->sede }}</td>
+                    <td colspan="2">{{ $registro->data_sede->nombre }}</td>
                     <td>Final</td>
-                    <td>{{ $registro->hora_final }}</td>
+                    <td>{{ $registro->hora_fin }}</td>
                 </tr>
                 <tr>
                     <td>Operador</td>

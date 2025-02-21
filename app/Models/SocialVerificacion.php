@@ -35,12 +35,12 @@ class SocialVerificacion extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function municipio()
+    public function data_municipio()
     {
         return $this->belongsTo(Municipio::class, 'municipio');
     }
 
-    public function institucion()
+    public function data_institucion()
     {
         return $this->belongsTo(Institucion::class, 'institucion');
     }

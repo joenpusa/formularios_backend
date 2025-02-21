@@ -9,12 +9,19 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 11px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        body {
+            font-size: 11px;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 6px;
             text-align: left;
         }
 
@@ -36,7 +43,7 @@
                 <tr>
                     <td rowspan="3"><img src="{{ public_path('images/logo2.png') }}"
                             style="width: 150px; padding: 5px" /></td>
-                    <td>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</td>
+                    <th>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</th>
                     <td><strong>VERSIÓN:</strong> 01</td>
                 </tr>
                 <tr>
@@ -56,16 +63,16 @@
                     <td>Fecha de la visita</td>
                     <td>{{ $registro->fecha_visita }}</td>
                     <td>Municipio</td>
-                    <td>{{ $registro->municipio }}</td>
+                    <td>{{ $registro->data_municipio->nombre }}</td>
                     <td rowspan="2">Hora de la visita</td>
                     <td>Inicial</td>
                     <td>{{ $registro->hora_inicial }}</td>
                 </tr>
                 <tr>
                     <td>Institución Educativa</td>
-                    <td colspan="2">{{ $registro->institucion }}</td>
+                    <td colspan="2">{{ $registro->data_institucion->nombre }}</td>
                     <td>Sede Educativa</td>
-                    <td colspan="2">{{ $registro->sede }}</td>
+                    <td colspan="2">{{ $registro->data_sede->nombre }}</td>
                     <td>Final</td>
                     <td>{{ $registro->hora_final }}</td>
                 </tr>
@@ -85,57 +92,62 @@
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td>Alimento</td>
-                    <td>Marca</td>
-                    <td>contenido neto</td>
-                    <td>nombre o direccion del fabricante</td>
-                    <td>Lote</td>
-                    <td>Fecha de vencimiento</td>
-                    <td>Registro, permiso, notificación sanitaria</td>
+                    <th>Alimento</th>
+                    <th>Marca</th>
+                    <th>contenido neto</th>
+                    <th>nombre o direccion del fabricante</th>
+                    <th>Lote</th>
+                    <th>Fecha de vencimiento</th>
+                    <th>Registro, permiso, notificación sanitaria</th>
                 </tr>
-                {{-- @foreach ($registro->filas as $fila) --}}
-                {{-- <tr>
-                    <td>{{ $fila->alimento }}</td>
-                    <td>{{ $fila->marca }}</td>
-                    <td>{{ $fila->contenido_neto }}</td>
-                    <td>{{ $fila->fabricante }}</td>
-                    <td>{{ $fila->lote }}</td>
-                    <td>{{ $fila->fecha_vencimiento }}</td>
-                    <td>{{ $fila->registro_permiso_sanitaria }}</td>
-                </tr> --}}
-                {{-- @endforeach --}}
-                <tr>
-                    <td colspan="9">Observaciones:</td>
-                </tr>
-                <tr>
-                    <td colspan="9">{{ $registro->observaciones }}</td>
-                </tr>
-                <tr>
-                    <td colspan="5">FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</td>
-                    <td colspan="4">FIRMA QUIEN ATIENDE LA VISITA</td>
-                </tr>
-                <tr>
-                    <td colspan="5"><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>
-                    <td colspan="4"><img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" /></td>
-                </tr>
-                <tr>
-                    <td colspan="5">NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
-                    <td colspan="4">NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="5">CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
-                    <td colspan="4">CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="5">CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
-                    <td colspan="4">CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="5">TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
-                    <td colspan="4">TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
+                @if (!empty($registro->filas))
+                    @foreach (json_decode($registro->filas, true) as $fila)
+                        <tr>
+                            <td>{{ $fila['material'] }}</td>
+                            <td>{{ $fila['marca'] }}</td>
+                            <td>{{ $fila['contenido'] }}</td>
+                            <td>{{ $fila['dir_fabricante'] }}</td>
+                            <td>{{ $fila['lote'] }}</td>
+                            <td>{{ $fila['fecha'] }}</td>
+                            <td>{{ $fila['registro'] }}</td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
-        {{ $registro }}
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th colspan="2">Observaciones:</th>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ $registro->observaciones }}</td>
+                </tr>
+                <tr>
+                    <th>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</th>
+                    <th>FIRMA QUIEN ATIENDE LA VISITA</th>
+                </tr>
+                <tr>
+                    <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>
+                    <td><img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" /></td>
+                </tr>
+                <tr>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
+                </tr>
+                <tr>
+                    <td>CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
+                    <td>CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
+                </tr>
+                <tr>
+                    <td>CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
+                    <td>CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
+                </tr>
+                <tr>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
+            </tbody>
+        </table>
     </div>
 </body>
 
