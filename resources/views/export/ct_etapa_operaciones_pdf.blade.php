@@ -12,17 +12,18 @@
             font-size: 11px;
             table-layout: fixed;
             word-wrap: break-word;
+            font-family: Calibri, sans-serif;
         }
 
         body {
             font-size: 11px;
-            /* Reducir tamaño de letra general */
+            font-family: Calibri, sans-serif;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 4px;
             text-align: left;
         }
 

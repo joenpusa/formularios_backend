@@ -89,7 +89,7 @@ class CtVerificacionModalidadRi extends Model
     ];
 
     protected $casts = [
-        'filas' => 'json',
+        'filas' => 'array',
     ];
 
     public function user()
