@@ -12,21 +12,23 @@
             font-size: 11px;
             table-layout: fixed;
             word-wrap: break-word;
+            font-family: Calibri, sans-serif;
         }
 
         body {
             font-size: 11px;
+            font-family: Calibri, sans-serif;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 4px;
             text-align: left;
         }
 
         th {
-            background-color: #F9E5A4;
+            background-color: #a4ecf9;
         }
 
         .header-section {
@@ -44,7 +46,7 @@
                 <tr>
                     <td rowspan="3"><img src="{{ public_path('images/logo2.png') }}"
                             style="width: 150px; padding: 5px" /></td>
-                    <td>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</td>
+                    <th>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</th>
                     <td><strong>VERSIÓN:</strong> 01</td>
                 </tr>
                 <tr>
@@ -95,8 +97,8 @@
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td colspan="2">Califique según nivel de cumplimiento: Cumple - No cumple - No aplica - No
-                        observado </td>
+                    <th colspan="2">Califique según nivel de cumplimiento: Cumple - No cumple - No aplica - No
+                        observado </th>
                 </tr>
                 <tr>
                     <td>1. Conoce la Resolución 00335 de 2021 - Lineamientos Generales del Programa de Alimentación
@@ -110,7 +112,7 @@
                     <td>{{ $registro->pre_2 }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Verificación Mecanismos de Participación Ciudadana </td>
+                    <th colspan="2">Verificación Mecanismos de Participación Ciudadana </th>
                 </tr>
                 <tr>
                     <td>3. Se evidencia soporte de conformación del Comité de Alimentación Escolar - CAE, en el
@@ -136,7 +138,7 @@
                     <td>{{ $registro->pre_6 }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Verificación Mecanismos de Participación Ciudadana </td>
+                    <th colspan="2">Verificación Mecanismos de Participación Ciudadana </th>
                 </tr>
                 <tr>
                     <td>7. La Institución Educativa manifiesta realizar seguimiento a la gestión del Programa de
@@ -153,7 +155,7 @@
                     <td>{{ $registro->pre_9 }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Acceso a la Información </td>
+                    <th colspan="2">Acceso a la Información </th>
                 </tr>
                 <tr>
                     <td>10. Se evidencia publicada la ficha técnica de información del PAE en un lugar visible, de tal
@@ -173,7 +175,7 @@
                     <td>{{ $registro->pre_12 }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Beneficiarios </td>
+                    <th colspan="2">Beneficiarios </th>
                 </tr>
                 <tr>
                     <td>13. Se tiene en cuenta los criterios establecidos en la resolución para la priorización de los
@@ -210,13 +212,13 @@
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td colspan="4">Observaciones / Recomendaciones / Conclusiones / Acciones de Mejora</td>
+                    <th colspan="4">Observaciones / Recomendaciones / Conclusiones / Acciones de Mejora</th>
                 </tr>
                 <tr>
                     <td colspan="4">{{ $registro->observaciones }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">Comprimisos adquiridos</td>
+                    <th colspan="4">Comprimisos adquiridos</th>
                 </tr>
                 <tr>
                     <td colspan="4">NOTA: Si se generan compromisos en relación a los mecanismos de gestión social
@@ -276,8 +278,8 @@
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</td>
-                    <td>FIRMA QUIEN ATIENDE LA VISITA</td>
+                    <th>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</th>
+                    <th>FIRMA QUIEN ATIENDE LA VISITA</th>
                 </tr>
                 <tr>
                     <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>

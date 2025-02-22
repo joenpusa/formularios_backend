@@ -12,21 +12,23 @@
             font-size: 11px;
             table-layout: fixed;
             word-wrap: break-word;
+            font-family: Calibri, sans-serif;
         }
 
         body {
             font-size: 11px;
+            font-family: Calibri, sans-serif;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 4px;
             text-align: left;
         }
 
         th {
-            background-color: #F9E5A4;
+            background-color: #a4ecf9;
         }
 
         .header-section {
@@ -44,12 +46,12 @@
                 <tr>
                     <td rowspan="3"><img src="{{ public_path('images/logo2.png') }}"
                             style="width: 150px; padding: 5px" /></td>
-                    <td>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</td>
+                    <th>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</th>
                     <td><strong>VERSIÓN:</strong> 01</td>
                 </tr>
                 <tr>
                     <td rowspan="2">FORMATO DE ASISTENCIA DE EDUCACIÓN ALIMENTARIA Y NUTRICIONAL</td>
-                    <td><strong>CÓDIGO:</strong> F-ECI-20</td>
+                    <td><strong>CÓDIGO:</strong> F-ECI-02</td>
                 </tr>
                 <tr>
                     <td><strong>VIGENTE DESDE:</strong> ENERO 2024</td>
@@ -65,66 +67,97 @@
                     <td>Fecha de la visita</td>
                     <td>{{ $registro->fecha_visita }}</td>
                     <td>Municipio</td>
-                    <td>{{ $registro->municipio }}</td>
+                    <td>{{ $registro->data_municipio->nombre }}</td>
                     <td rowspan="2">Hora de la visita</td>
                     <td>Inicial</td>
-                    <td>{{ $registro->hora_inicial }}</td>
+                    <td>{{ $registro->hora_inicio }}</td>
                 </tr>
                 <tr>
                     <td>Institución Educativa</td>
-                    <td colspan="2">{{ $registro->institucion }}</td>
+                    <td colspan="2">{{ $registro->data_institucion->nombre }}</td>
                     <td>Sede Educativa</td>
-                    <td colspan="2">{{ $registro->sede }}</td>
+                    <td colspan="2">{{ $registro->data_sede->nombre }}</td>
                     <td>Final</td>
-                    <td>{{ $registro->hora_final }}</td>
+                    <td>{{ $registro->hora_fin }}</td>
                 </tr>
                 <tr>
                     <td>Operador</td>
-                    <td colspan="2">{{ $registro->operador }}</td>
+                    <td colspan="3">{{ $registro->operador }}</td>
                     <td>No Contrato</td>
-                    <td colspan="2">{{ $registro->contrato }}</td>
-                    <td colspan="3" rowspan="2">Supervisor: {{ $registro->supervisor }}</td>
-                </tr>
-                <tr>
-                    <td colspan="3">Modalidad</td>
-                    <td colspan="3">{{ $registro->modalidad }}</td>
+                    <td colspan="4">{{ $registro->contrato }}</td>
                 </tr>
             </tbody>
         </table>
-        <!-- TABLA DE FIRMAS -->
+        <!-- Tabla de objetivos y temáticas -->
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td>Observaciones:</td>
+                    <th>Objetivo</th>
                 </tr>
                 <tr>
-                    <td>{{ $registro->observaciones }}</td>
+                    <td>{{ $registro->objetivo }}</td>
                 </tr>
                 <tr>
-                    <td>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</td>
-                    <td>FIRMA QUIEN ATIENDE LA VISITA</td>
+                    <th>Temática abordada</th>
                 </tr>
                 <tr>
-                    <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>
-                    <td><img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" /></td>
+                    <td>{{ $registro->tematica }}</td>
                 </tr>
-                <tr>
-                    <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
-                    <td>NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
-                </tr>
-                <tr>
-                    <td>CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
-                    <td>CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
-                </tr>
-                <tr>
-                    <td>CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
-                    <td>CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
-                </tr>
-                <tr>
-                    <td>TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
-                    <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
             </tbody>
-        </table>
+            <!-- tabla de estudantes -->
+            <table class="table table-bordered">
+                <thead class="text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombres y apellidos</th>
+                        <th>Grado escolar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (json_decode($registro->filas, true) as $fila)
+                        {{ $n = 1 }}
+                        <tr>
+                            <td>{{ $n }}</td>
+                            <td>{{ $fila['nombre'] }}</td>
+                            <td>{{ $fila['grado'] }}</td>
+                        </tr>
+                        {{ $n = $n + 1 }}
+                    @endforeach
+                    <tr>
+                        <td colspan="2">Total de beneficiarios:</td>
+                        <td>{{ $registro->num_beneficiarios }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- TABLA DE FIRMAS -->
+            <table class="table table-bordered">
+                <tbody>
+
+                    <tr>
+                        <th>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</th>
+                        <th>FIRMA QUIEN ATIENDE LA VISITA</th>
+                    </tr>
+                    <tr>
+                        <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>
+                        <td><img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" /></td>
+                    </tr>
+                    <tr>
+                        <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
+                        <td>NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
+                        <td>CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
+                        <td>CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
+                        <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
+                </tbody>
+            </table>
     </div>
 </body>
 

@@ -18,9 +18,9 @@ class CtVerificacionMateriaPrimaPsController extends Controller
         $request->validate([
             'etc' => 'required|string',
             'fecha_visita' => 'nullable|date',
-            'municipio' => 'nullable|string',
-            'institucion' => 'nullable|string',
-            'sede' => 'nullable|string',
+            'municipio' => 'nullable|integer',
+            'institucion' => 'nullable|integer',
+            'sede' => 'nullable|integer',
             'hora_inicial' => 'nullable|date_format:H:i',
             'hora_final' => 'nullable|date_format:H:i',
             'operador' => 'nullable|string',
@@ -42,6 +42,7 @@ class CtVerificacionMateriaPrimaPsController extends Controller
             'cedula_atiende' => 'nullable|string',
             'cargo_atiende' => 'nullable|string',
             'telefono_atiende' => 'nullable|string',
+            'nota1' => 'nullable|string',
         ]);
 
         $data = $request->all();

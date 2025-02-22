@@ -42,8 +42,8 @@ class CtVerificacionRotuladoRi extends Model
         'fecha_visita' => 'date',
         'hora_inicial' => 'datetime:H:i',
         'hora_final' => 'datetime:H:i',
-        'filas_5109' => 'json',
-        'filas_810' => 'json',
+        'filas_5109' => 'array',
+        'filas_810' => 'array',
     ];
 
     public function user()

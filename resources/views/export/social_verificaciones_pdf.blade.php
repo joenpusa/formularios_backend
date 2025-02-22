@@ -12,21 +12,23 @@
             font-size: 11px;
             table-layout: fixed;
             word-wrap: break-word;
+            font-family: Calibri, sans-serif;
         }
 
         body {
             font-size: 11px;
+            font-family: Calibri, sans-serif;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 8px;
+            padding: 4px;
             text-align: left;
         }
 
         th {
-            background-color: #F9E5A4;
+            background-color: #a4ecf9;
         }
 
         .header-section {
@@ -44,13 +46,13 @@
                 <tr>
                     <td rowspan="3"><img src="{{ public_path('images/logo2.png') }}"
                             style="width: 150px; padding: 5px" /></td>
-                    <td>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</td>
+                    <th>PROGRAMA DE ALIMENTACIÓN ESCOLAR NORTE DE SANTANDER</th>
                     <td><strong>VERSIÓN:</strong> 01</td>
                 </tr>
                 <tr>
                     <td rowspan="2">FORMATO DE VERIFICACIÓN PERSONAL MANIPULADOR DE ALIMENTOS PADRES DE FAMILIA DE
                         LOS BENEFICIARIOS PAE.</td>
-                    <td><strong>CÓDIGO:</strong> F-ECI-20</td>
+                    <td><strong>CÓDIGO:</strong> F-ECI-03</td>
                 </tr>
                 <tr>
                     <td><strong>VIGENTE DESDE:</strong> ENERO 2024</td>
@@ -66,29 +68,89 @@
                     <td>Fecha de la visita</td>
                     <td>{{ $registro->fecha_visita }}</td>
                     <td>Municipio</td>
-                    <td>{{ $registro->municipio }}</td>
-                    <td rowspan="2">Hora de la visita</td>
-                    <td>Inicial</td>
-                    <td>{{ $registro->hora_inicial }}</td>
+                    <td>{{ $registro->data_municipio->nombre }}</td>
                 </tr>
                 <tr>
-                    <td>Institución Educativa</td>
-                    <td colspan="2">{{ $registro->institucion }}</td>
-                    <td>Sede Educativa</td>
-                    <td colspan="2">{{ $registro->sede }}</td>
-                    <td>Final</td>
-                    <td>{{ $registro->hora_final }}</td>
+                    <td colspan="2">Institución Educativa principal o CER principal</td>
+                    <td colspan="4">{{ $registro->data_institucion->nombre }}</td>
                 </tr>
                 <tr>
                     <td>Operador</td>
                     <td colspan="2">{{ $registro->operador }}</td>
                     <td>No Contrato</td>
                     <td colspan="2">{{ $registro->contrato }}</td>
-                    <td colspan="3" rowspan="2">Supervisor: {{ $registro->supervisor }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3">Modalidad</td>
-                    <td colspan="3">{{ $registro->modalidad }}</td>
+                    <td colspan="6">Digite cada uno de los campos con la información de cada una de las Sedes que
+                        conforman el Establecimiento Educativo
+                        Principal.</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Tabla de cantidad de manipuladores -->
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="col" rowspan="2">Nombre de la sede educativa</th>
+                    <th scope="col" rowspan="2">Modalidad de Atención</th>
+                    <th scope="col" colspan="3">
+                        Número total de manipuladores
+                    </th>
+                    <th scope="col" colspan="3">
+                        Número de manipuladores padres de familia
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="col">PS</th>
+                    <th scope="col">CCT</th>
+                    <th scope="col">I</th>
+                    <th scope="col">PS</th>
+                    <th scope="col">CCT</th>
+                    <th scope="col">I</th>
+                </tr>
+                @php
+                    $totalRps1 = 0;
+                    $totalCct1 = 0;
+                    $totalRi1 = 0;
+                    $totalRps2 = 0;
+                    $totalCct2 = 0;
+                    $totalRi2 = 0;
+                @endphp
+                @foreach (json_decode($registro->filas, true) as $fila)
+                    @php
+                        $totalRps1 += $fila['rps1'];
+                        $totalCct1 += $fila['cct1'];
+                        $totalRi1 += $fila['ri1'];
+                        $totalRps2 += $fila['rps2'];
+                        $totalCct2 += $fila['cct2'];
+                        $totalRi2 += $fila['ri2'];
+                    @endphp
+                    <tr class="text-center">
+                        <td>{{ $fila['nombreSede'] }}</td>
+                        <td>{{ $fila['modalidad'] }}</td>
+                        <td>{{ $fila['rps1'] }}</td>
+                        <td>{{ $fila['cct1'] }}</td>
+                        <td>{{ $fila['ri1'] }}</td>
+                        <td>{{ $fila['rps2'] }}</td>
+                        <td>{{ $fila['cct2'] }}</td>
+                        <td>{{ $fila['ri2'] }}</td>
+                    </tr>
+                @endforeach
+                <tr class="text-center font-weight-bold">
+                    <td colspan="2">Totales</td>
+                    <td>{{ $totalRps1 }}</td>
+                    <td>{{ $totalCct1 }}</td>
+                    <td>{{ $totalRi1 }}</td>
+                    <td>{{ $totalRps2 }}</td>
+                    <td>{{ $totalCct2 }}</td>
+                    <td>{{ $totalRi2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="small-text-row">
+                        I: Modalidad Industrializada<br />
+                        CCT: Modalidad Comida Caliente Transportada<br />
+                        PS: Modalidad Preparada en Sitio
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -96,14 +158,8 @@
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td>Observaciones:</td>
-                </tr>
-                <tr>
-                    <td>{{ $registro->observaciones }}</td>
-                </tr>
-                <tr>
-                    <td>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</td>
-                    <td>FIRMA QUIEN ATIENDE LA VISITA</td>
+                    <th>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</th>
+                    <th>FIRMA QUIEN ATIENDE LA VISITA</th>
                 </tr>
                 <tr>
                     <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>

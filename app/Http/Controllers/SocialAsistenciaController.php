@@ -47,6 +47,7 @@ class SocialAsistenciaController extends Controller
             'firma2' => 'nullable|string',
             'filas' => 'nullable|json',
             'files.*' => 'nullable|file',
+            'tematica' => 'nullable|string',
 
         ]);
 

@@ -35,6 +35,7 @@ class SocialAsistencia extends Model
         'firma2',
         'filas',
         'created_by',
+        'tematica',
     ];
 
     protected $casts = [
