@@ -37,6 +37,7 @@ class CtVerificacionMateriaPrimaPs extends Model
         'cedula_atiende',
         'cargo_atiende',
         'telefono_atiende',
+        'nota1',
         'created_by'
     ];
 
@@ -44,7 +45,6 @@ class CtVerificacionMateriaPrimaPs extends Model
         'fecha_visita' => 'date',
         'hora_inicial' => 'datetime',
         'hora_final' => 'datetime',
-        'files' => 'array',
         'filas' => 'json'
     ];
 
