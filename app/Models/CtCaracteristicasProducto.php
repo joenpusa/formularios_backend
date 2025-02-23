@@ -104,7 +104,7 @@ class CtCaracteristicasProducto extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function municipio()
+    public function data_municipio()
     {
         return $this->belongsTo(Municipio::class, 'municipio');
     }
