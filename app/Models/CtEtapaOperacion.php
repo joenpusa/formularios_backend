@@ -21,6 +21,9 @@ class CtEtapaOperacion extends Model
         'fecha_visita',
         'hora_inicio',
         'hora_fin',
+        'fecha_visita2',
+        'hora_inicio2',
+        'hora_fin2',
         'num_visita',
         'tipo_visita',
         'fecha_certificado',
@@ -32,10 +35,15 @@ class CtEtapaOperacion extends Model
         'observaciones_recibe',
         'firma1',
         'firma2',
+        'firma3',
         'nombre_apoyo',
         'cedula_apoyo',
         'cargo_apoyo',
         'telefono_apoyo',
+        'nombre_apoyo2',
+        'cedula_apoyo2',
+        'cargo_apoyo2',
+        'telefono_apoyo2',
         'nombre_atiende',
         'cedula_atiende',
         'cargo_atiende',
@@ -63,7 +71,7 @@ class CtEtapaOperacion extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function municipio()
+    public function data_municipio()
     {
         return $this->belongsTo(Municipio::class, 'municipio');
     }

@@ -441,7 +441,7 @@ class ReporteController extends Controller
                 'social_verificaciones' => SocialVerificacion::class,
                 'ct_verificacion_materia_prima_ps' => CtVerificacionMateriaPrimaPs::class,
                 'ct_verificacion_cct' => CtVerificacionCct::class,
-                'ct_seguimiento_etiquetado' => CtSeguimientoEtiquetado::class,
+                'ct_seguimiento_etiquetados' => CtSeguimientoEtiquetado::class,
                 'ct_caracteristicas_productos' => CtCaracteristicasProducto::class,
                 'ct_toma_muestras' => CtTomaMuestra::class,
                 'ct_etapa_operaciones' => CtEtapaOperacion::class,
