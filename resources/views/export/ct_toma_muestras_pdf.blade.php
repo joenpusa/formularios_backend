@@ -55,7 +55,6 @@
                 </tr>
                 <tr>
                     <td rowspan="2">TOMA DE MUESTRA PRODUCTO
-                        <strong>CÓDIGO:</strong>
                         @if ($registro->tipo == 'pollo')
                             POLLO
                         @elseif ($registro->tipo == 'cerdo')
