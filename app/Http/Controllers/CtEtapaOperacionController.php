@@ -28,6 +28,9 @@ class CtEtapaOperacionController extends Controller
             'fecha_visita' => 'nullable|date',
             'hora_inicio' => 'nullable|date_format:H:i',
             'hora_fin' => 'nullable|date_format:H:i',
+            'fecha_visita2' => 'nullable|date',
+            'hora_inicio2' => 'nullable|date_format:H:i',
+            'hora_fin2' => 'nullable|date_format:H:i',
             'num_visita' => 'nullable|string',
             'tipo_visita' => 'nullable|string|max:255',
             'files.*' => 'nullable|file',
@@ -38,10 +41,15 @@ class CtEtapaOperacionController extends Controller
             'observaciones_recibe' => 'nullable|string',
             'firma1' => 'nullable|string',
             'firma2' => 'nullable|string',
+            'firma3' => 'nullable|string',
             'telefono_apoyo' => 'nullable|string',
             'nombre_apoyo' => 'nullable|string',
             'cedula_apoyo' => 'nullable|string',
             'cargo_apoyo' => 'nullable|string',
+            'telefono_apoyo2' => 'nullable|string',
+            'nombre_apoyo2' => 'nullable|string',
+            'cedula_apoyo2' => 'nullable|string',
+            'cargo_apoyo2' => 'nullable|string',
             'telefono_atiende' => 'nullable|string',
             'nombre_atiende' => 'nullable|string',
             'cedula_atiende' => 'nullable|string',
@@ -64,7 +72,7 @@ class CtEtapaOperacionController extends Controller
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 // Guardar el archivo en el directorio correspondiente
-                $filePath = $file->store('tecnico/EtaOperaciones/' . $ctEtapaOperaciones->id, 'public');
+                $filePath = $file->store('tecnico/ct_etapa_operaciones/' . $ctEtapaOperaciones->id, 'public');
 
                 // Crear el registro en la tabla attachments
                 Attachment::create([
