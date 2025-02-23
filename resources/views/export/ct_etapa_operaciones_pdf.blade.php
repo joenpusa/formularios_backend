@@ -200,6 +200,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <th colspan="4">II. PERSONAL MANIPULADOR DE BODEGA</th>
+                </tr>
+                <tr>
                     <td>6</td>
                     <td>
                         El personal manipulador de bodega, utiliza la dotación completa (vestimenta, calzado cerrado,
@@ -237,6 +240,9 @@
                     <td>
                         {{ $registro->pre_8_obs }}
                     </td>
+                </tr>
+                <tr>
+                    <th colspan="4">III. REQUISITOS HIGIÉNICOS DE ALMACENAMIENTO DE LOS ALIMENTOS EN LA BODEGA</th>
                 </tr>
                 <tr>
                     <td>9</td>
@@ -290,6 +296,9 @@
                     <td>
                         {{ $registro->pre_12_obs }}
                     </td>
+                </tr>
+                <tr>
+                    <th colspan="4">IV. CONDICIONES DE ALMACENAMIENTO DE LOS ALIMENTOS</th>
                 </tr>
                 <tr>
                     <td>13</td>
@@ -513,6 +522,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <th colspan="4">V. EQUIPOS Y/O UTENSILIOS DE BODEGA</th>
+                </tr>
+                <tr>
                     <td>30</td>
                     <td>
                         Los equipos y/o utensilios están fabricados con materiales resistentes al uso y a la corrosión.
@@ -536,6 +548,9 @@
                     <td>
                         {{ $registro->pre_31_obs }}
                     </td>
+                </tr>
+                <tr>
+                    <th colspan="4">VI. CONDICIONES DE TRANSPORTE DE LOS ALIMENTOS</th>
                 </tr>
                 <tr>
                     <td>32</td>
@@ -589,6 +604,10 @@
                     <td>
                         {{ $registro->pre_35_obs }}
                     </td>
+                </tr>
+                <tr>
+                    <th colspan="4">VII. VERIFICACIÓN DOCUMENTAL / REGISTROS / SOPORTES DE OPERACIÓN BODEGA DE
+                        ALMACENAMIENTO</th>
                 </tr>
                 <tr>
                     <td>36</td>
@@ -757,6 +776,10 @@
                     <td>
                         {{ $registro->pre_48_obs }}
                     </td>
+                </tr>
+                <tr>
+                    <th colspan="4">VIII. VERIFICACIÓN DOCUMENTAL / REGISTROS / SOPORTES DE OPERACIÓN PAE MODALIDADES
+                        APS, CCT Y RI</th>
                 </tr>
                 <tr>
                     <td>49</td>
