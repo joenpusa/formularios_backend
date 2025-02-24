@@ -55,7 +55,7 @@
                     <td><strong>CÓDIGO:</strong> F-ECI-05</td>
                 </tr>
                 <tr>
-                    <td><strong>VIGENTE DESDE:</strong> ENERO 2024</td>
+                    <td><strong>VIGENTE DESDE:</strong> ENERO 2025</td>
                 </tr>
             </tbody>
         </table>
@@ -463,7 +463,7 @@
                     <th colspan="2">OBSERVACIONES GENERALES</th>
                 </tr>
                 <tr>
-                    <td colspan="2">{{ $registro->observaciones }}</td>
+                    <td colspan="2">{{ $registro->observaciones_generales }}</td>
                 </tr>
                 <tr>
                     <th>FIRMA QUIEN ATIENDE LA VISITA</th>

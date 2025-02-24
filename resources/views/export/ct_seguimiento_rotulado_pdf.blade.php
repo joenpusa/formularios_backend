@@ -53,7 +53,7 @@
                     <td><strong>CÓDIGO:</strong> F-ECI-20</td>
                 </tr>
                 <tr>
-                    <td><strong>VIGENTE DESDE:</strong> ENERO 2024</td>
+                    <td><strong>VIGENTE DESDE:</strong> ENERO 2025</td>
                 </tr>
             </tbody>
         </table>

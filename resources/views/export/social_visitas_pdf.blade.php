@@ -20,6 +20,10 @@
             font-family: Calibri, sans-serif;
         }
 
+        .col-num {
+            width: 25%;
+        }
+
         th,
         td {
             border: 1px solid black;
@@ -55,7 +59,7 @@
                     <td><strong>CÓDIGO:</strong> FFT-OPM-01</td>
                 </tr>
                 <tr>
-                    <td><strong>VIGENTE DESDE:</strong> ENERO 2024</td>
+                    <td><strong>VIGENTE DESDE:</strong> ENERO 2025</td>
                 </tr>
             </tbody>
         </table>
@@ -86,11 +90,11 @@
                     <td colspan="2">{{ $registro->operador }}</td>
                     <td>No Contrato</td>
                     <td colspan="2">{{ $registro->contrato }}</td>
-                    <td colspan="3" rowspan="2">Supervisor: {{ $registro->supervisor }}</td>
+                    <td colspan="1">Modalidad</td>
+                    <td colspan="2">{{ $registro->modalidad }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3">Modalidad</td>
-                    <td colspan="3">{{ $registro->modalidad }}</td>
+
                 </tr>
             </tbody>
         </table>
@@ -103,7 +107,7 @@
                 <tr>
                     <td>1. Conoce la Resolución 00335 de 2021 - Lineamientos Generales del Programa de Alimentación
                         Escolar- PAE.</td>
-                    <td>{{ $registro->pre_1 }}</td>
+                    <td class="col-num">{{ $registro->pre_1 }}</td>
                 </tr>
                 <tr>
                     <td>2. Conoce los mecanismos de participación ciudadana, control social y acceso a la información
@@ -138,7 +142,7 @@
                     <td>{{ $registro->pre_6 }}</td>
                 </tr>
                 <tr>
-                    <th colspan="2">Verificación Mecanismos de Participación Ciudadana </th>
+                    <th colspan="2">Verificación Mecanismos de Control Social </th>
                 </tr>
                 <tr>
                     <td>7. La Institución Educativa manifiesta realizar seguimiento a la gestión del Programa de
