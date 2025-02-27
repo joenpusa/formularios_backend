@@ -101,7 +101,9 @@
                     </th>
                 </tr>
                 <tr>
-                    <td>A.Leguminosa:</td>
+                    <td>A.Leguminosa:
+                        {{ $registro->nombre_A_Leguminosa }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Leguminosa }}
                     </td>
@@ -125,7 +127,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>B.Leguminosa:</td>
+                    <td>B.Leguminosa:
+                        {{ $registro->nombre_B_Leguminosa }}
+                    </td>
                     <td>
                         {{ $registro->marca_B_Leguminosa }}
                     </td>
@@ -149,7 +153,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>C.Leguminosa:</td>
+                    <td>C.Leguminosa:
+                        {{ $registro->nombre_C_Leguminosa }}
+                    </td>
                     <td>
                         {{ $registro->marca_C_Leguminosa }}
                     </td>
@@ -173,7 +179,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Arroz:</td>
+                    <td>A. Arroz:
+                        {{ $registro->nombre_A_Arroz }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Arroz }}
                     </td>
@@ -197,7 +205,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Azucar:</td>
+                    <td>A. Azucar:
+                        {{ $registro->nombre_A_Azucar }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Azucar }}
                     </td>
@@ -221,7 +231,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Sal:</td>
+                    <td>A. Sal:
+                        {{ $registro->nombre_A_Sal }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Sal }}
                     </td>
@@ -245,7 +257,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Aceite:</td>
+                    <td>A. Aceite:
+                        {{ $registro->nombre_A_Aceite }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Aceite }}
                     </td>
@@ -269,7 +283,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Leche en polvo:</td>
+                    <td>A. Leche en polvo:
+                        {{ $registro->nombre_A_Lechep }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Lechep }}
                     </td>
@@ -293,7 +309,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Spaghetti:</td>
+                    <td>A. Spaghetti:
+                        {{ $registro->nombre_A_Spaghetti }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_Spaghetti }}
                     </td>
@@ -317,7 +335,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Cereal: Pan de Leche:</td>
+                    <td>A. Cereal: Pan de Leche:
+                        {{ $registro->nombre_A_PanLeche }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_PanLeche }}
                     </td>
@@ -341,7 +361,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>B. Cereal: Pan Mantequilla</td>
+                    <td>B. Cereal: Pan Mantequilla
+                        {{ $registro->nombre_B_PanMantequilla }}
+                    </td>
                     <td>
                         {{ $registro->marca_B_PanMantequilla }}
                     </td>
@@ -365,7 +387,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>C. Cereal: Pan Sal:</td>
+                    <td>C. Cereal: Pan Sal:
+                        {{ $registro->nombre_C_PanSal }}
+                    </td>
                     <td>
                         {{ $registro->marca_C_PanSal }}
                     </td>
@@ -389,7 +413,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>D. Cereal: Pan Dulce:</td>
+                    <td>D. Cereal: Pan Dulce:
+                        {{ $registro->nombre_D_PanDulce }}
+                    </td>
                     <td>
                         {{ $registro->marca_D_PanDulce }}
                     </td>
@@ -413,7 +439,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>E. Cereal: Pan Maiz</td>
+                    <td>E. Cereal: Pan Maiz
+                        {{ $registro->nombre_E_PanMaiz }}
+                    </td>
                     <td>
                         {{ $registro->marca_E_PanMaiz }}
                     </td>
@@ -437,7 +465,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>F. Cereal: Glleta Casera</td>
+                    <td>F. Cereal: Galleta Casera
+                        {{ $registro->nombre_F_GlletaCasera }}
+                    </td>
                     <td>
                         {{ $registro->marca_F_GlletaCasera }}
                     </td>
@@ -461,7 +491,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>A. Lácteo: Leche Entera</td>
+                    <td>A. Lácteo: Leche Entera
+                        {{ $registro->nombre_A_LacheEntera }}
+                    </td>
                     <td>
                         {{ $registro->marca_A_LacheEntera }}
                     </td>
@@ -485,7 +517,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>B. Lácteo: Avena</td>
+                    <td>B. Lácteo: Avena
+                        {{ $registro->nombre_B_LacteoAvena }}
+                    </td>
                     <td>
                         {{ $registro->marca_B_LacteoAvena }}
                     </td>
@@ -509,7 +543,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>B. Lácteo: Avena Sabor a Maracuya</td>
+                    <td>B. Lácteo: Avena Sabor a Maracuya
+                        {{ $registro->nombre_B_LacteoAvenaSaborMaracuya }}
+                    </td>
                     <td>
                         {{ $registro->marca_B_LacteoAvenaSaborMaracuya }}
                     </td>
@@ -533,7 +569,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>B. Dulce: Bocadillo de Guayaba</td>
+                    <td>B. Dulce: Bocadillo de Guayaba
+                        {{ $registro->nombre_B_DulceBocadilloGuayaba }}
+                    </td>
                     <td>
                         {{ $registro->marca_B_DulceBocadilloGuayaba }}
                     </td>
@@ -578,24 +616,24 @@
                     <td><img src="{{ $registro->firma3 }}" style="width: 150px; padding: 5px" /></td>
                 </tr>
                 <tr>
-                    <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
-                    <td>NOMBRE: <strong>{{ $registro->nombre_atiende1 }}</strong></td>
-                    <td>NOMBRE: <strong>{{ $registro->nombre_atiende2 }}</strong></td>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_apoyo1 }}</strong></td>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_apoyo2 }}</strong></td>
                 </tr>
                 <tr>
-                    <td>CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
-                    <td>CEDULA: <strong>{{ $registro->cedula_atiende1 }}</strong></td>
-                    <td>CEDULA: <strong>{{ $registro->cedula_atiende2 }}</strong></td>
+                    <td>CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
+                    <td>CEDULA: <strong>{{ $registro->cedula_apoyo1 }}</strong></td>
+                    <td>CEDULA: <strong>{{ $registro->cedula_apoyo2 }}</strong></td>
                 </tr>
                 <tr>
-                    <td>CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
-                    <td>CARGO: <strong>{{ $registro->cargo_atiende1 }}</strong></td>
-                    <td>CARGO: <strong>{{ $registro->cargo_atiende2 }}</strong></td>
+                    <td>CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
+                    <td>CARGO: <strong>{{ $registro->cargo_apoyo1 }}</strong></td>
+                    <td>CARGO: <strong>{{ $registro->cargo_apoyo2 }}</strong></td>
                 </tr>
                 <tr>
-                    <td>TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
-                    <td>TELEFONO: <strong>{{ $registro->telefono_atiende1 }}</strong></td>
-                    <td>TELEFONO: <strong>{{ $registro->telefono_atiende2 }}</strong></td>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_apoyo1 }}</strong></td>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_apoyo2 }}</strong></td>
             </tbody>
         </table>
     </div>

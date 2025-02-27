@@ -49,6 +49,7 @@ class CtSeguimientoEtiquetado extends Model
         ];
 
         foreach ($fields as $field) {
+            $dynamicFields[] = "nombre_{$field}";
             $dynamicFields[] = "marca_{$field}";
             $dynamicFields[] = "contenido_{$field}";
             $dynamicFields[] = "pais_{$field}";
