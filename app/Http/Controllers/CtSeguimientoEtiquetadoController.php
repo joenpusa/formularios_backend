@@ -26,6 +26,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'contrato' => 'nullable|string|max:50',
             'fecha_visita' => 'nullable|date',
 
+            'nombre_A_Leguminosa' => 'nullable|string|max:120',
             'marca_A_Leguminosa' => 'nullable|string|max:100',
             'contenido_A_Leguminosa' => 'nullable|string|max:100',
             'pais_A_Leguminosa' => 'nullable|string|max:100',
@@ -34,6 +35,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Leguminosa' => 'nullable|date',
             'registro_A_Leguminosa' => 'nullable|string|max:100',
 
+            'nombre_B_Leguminosa' => 'nullable|string|max:120',
             'marca_B_Leguminosa' => 'nullable|string|max:100',
             'contenido_B_Leguminosa' => 'nullable|string|max:100',
             'pais_B_Leguminosa' => 'nullable|string|max:100',
@@ -42,6 +44,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_B_Leguminosa' => 'nullable|date',
             'registro_B_Leguminosa' => 'nullable|string|max:100',
 
+            'nombre_C_Leguminosa' => 'nullable|string|max:120',
             'marca_C_Leguminosa' => 'nullable|string|max:100',
             'contenido_C_Leguminosa' => 'nullable|string|max:100',
             'pais_C_Leguminosa' => 'nullable|string|max:100',
@@ -50,6 +53,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_C_Leguminosa' => 'nullable|date',
             'registro_C_Leguminosa' => 'nullable|string|max:100',
 
+            'nombre_A_Arroz' => 'nullable|string|max:120',
             'marca_A_Arroz' => 'nullable|string|max:100',
             'contenido_A_Arroz' => 'nullable|string|max:100',
             'pais_A_Arroz' => 'nullable|string|max:100',
@@ -58,6 +62,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Arroz' => 'nullable|date',
             'registro_A_Arroz' => 'nullable|string|max:100',
 
+            'nombre_A_Azucar' => 'nullable|string|max:120',
             'marca_A_Azucar' => 'nullable|string|max:100',
             'contenido_A_Azucar' => 'nullable|string|max:100',
             'pais_A_Azucar' => 'nullable|string|max:100',
@@ -66,6 +71,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Azucar' => 'nullable|date',
             'registro_A_Azucar' => 'nullable|string|max:100',
 
+            'nombre_A_Sal' => 'nullable|string|max:120',
             'marca_A_Sal' => 'nullable|string|max:100',
             'contenido_A_Sal' => 'nullable|string|max:100',
             'pais_A_Sal' => 'nullable|string|max:100',
@@ -74,6 +80,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Sal' => 'nullable|date',
             'registro_A_Sal' => 'nullable|string|max:100',
 
+            'nombre_A_Aceite' => 'nullable|string|max:120',
             'marca_A_Aceite' => 'nullable|string|max:100',
             'contenido_A_Aceite' => 'nullable|string|max:100',
             'pais_A_Aceite' => 'nullable|string|max:100',
@@ -82,6 +89,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Aceite' => 'nullable|date',
             'registro_A_Aceite' => 'nullable|string|max:100',
 
+            'nombre_A_Lechep' => 'nullable|string|max:120',
             'marca_A_Lechep' => 'nullable|string|max:100',
             'contenido_A_Lechep' => 'nullable|string|max:100',
             'pais_A_Lechep' => 'nullable|string|max:100',
@@ -90,6 +98,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Lechep' => 'nullable|date',
             'registro_A_Lechep' => 'nullable|string|max:100',
 
+            'nombre_A_Spaghetti' => 'nullable|string|max:120',
             'marca_A_Spaghetti' => 'nullable|string|max:100',
             'contenido_A_Spaghetti' => 'nullable|string|max:100',
             'pais_A_Spaghetti' => 'nullable|string|max:100',
@@ -98,6 +107,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_Spaghetti' => 'nullable|date',
             'registro_A_Spaghetti' => 'nullable|string|max:100',
 
+            'nombre_A_PanLeche' => 'nullable|string|max:120',
             'marca_A_PanLeche' => 'nullable|string|max:100',
             'contenido_A_PanLeche' => 'nullable|string|max:100',
             'pais_A_PanLeche' => 'nullable|string|max:100',
@@ -106,6 +116,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_PanLeche' => 'nullable|date',
             'registro_A_PanLeche' => 'nullable|string|max:100',
 
+            'nombre_B_PanMantequilla' => 'nullable|string|max:120',
             'marca_B_PanMantequilla' => 'nullable|string|max:100',
             'contenido_B_PanMantequilla' => 'nullable|string|max:100',
             'pais_B_PanMantequilla' => 'nullable|string|max:100',
@@ -114,6 +125,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_B_PanMantequilla' => 'nullable|date',
             'registro_B_PanMantequilla' => 'nullable|string|max:100',
 
+            'nombre_C_PanSal' => 'nullable|string|max:120',
             'marca_C_PanSal' => 'nullable|string|max:100',
             'contenido_C_PanSal' => 'nullable|string|max:100',
             'pais_C_PanSal' => 'nullable|string|max:100',
@@ -122,6 +134,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_C_PanSal' => 'nullable|date',
             'registro_C_PanSal' => 'nullable|string|max:100',
 
+            'nombre_D_PanDulce' => 'nullable|string|max:120',
             'marca_D_PanDulce' => 'nullable|string|max:100',
             'contenido_D_PanDulce' => 'nullable|string|max:100',
             'pais_D_PanDulce' => 'nullable|string|max:100',
@@ -130,6 +143,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_D_PanDulce' => 'nullable|date',
             'registro_D_PanDulce' => 'nullable|string|max:100',
 
+            'nombre_E_PanMaiz' => 'nullable|string|max:120',
             'marca_E_PanMaiz' => 'nullable|string|max:100',
             'contenido_E_PanMaiz' => 'nullable|string|max:100',
             'pais_E_PanMaiz' => 'nullable|string|max:100',
@@ -138,6 +152,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_E_PanMaiz' => 'nullable|date',
             'registro_E_PanMaiz' => 'nullable|string|max:100',
 
+            'nombre_F_GlletaCasera' => 'nullable|string|max:120',
             'marca_F_GlletaCasera' => 'nullable|string|max:100',
             'contenido_F_GlletaCasera' => 'nullable|string|max:100',
             'pais_F_GlletaCasera' => 'nullable|string|max:100',
@@ -146,6 +161,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_F_GlletaCasera' => 'nullable|date',
             'registro_F_GlletaCasera' => 'nullable|string|max:100',
 
+            'nombre_A_LacheEntera' => 'nullable|string|max:120',
             'marca_A_LacheEntera' => 'nullable|string|max:100',
             'contenido_A_LacheEntera' => 'nullable|string|max:100',
             'pais_A_LacheEntera' => 'nullable|string|max:100',
@@ -154,6 +170,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_A_LacheEntera' => 'nullable|date',
             'registro_A_LacheEntera' => 'nullable|string|max:100',
 
+            'nombre_B_LacteoAvena' => 'nullable|string|max:120',
             'marca_B_LacteoAvena' => 'nullable|string|max:100',
             'contenido_B_LacteoAvena' => 'nullable|string|max:100',
             'pais_B_LacteoAvena' => 'nullable|string|max:100',
@@ -162,6 +179,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_B_LacteoAvena' => 'nullable|date',
             'registro_B_LacteoAvena' => 'nullable|string|max:100',
 
+            'nombre_B_LacteoAvenaSaborMaracuya' => 'nullable|string|max:120',
             'marca_B_LacteoAvenaSaborMaracuya' => 'nullable|string|max:100',
             'contenido_B_LacteoAvenaSaborMaracuya' => 'nullable|string|max:100',
             'pais_B_LacteoAvenaSaborMaracuya' => 'nullable|string|max:100',
@@ -170,6 +188,7 @@ class CtSeguimientoEtiquetadoController extends Controller
             'fecha_B_LacteoAvenaSaborMaracuya' => 'nullable|date',
             'registro_B_LacteoAvenaSaborMaracuya' => 'nullable|string|max:100',
 
+            'nombre_B_DulceBocadilloGuayaba' => 'nullable|string|max:120',
             'marca_B_DulceBocadilloGuayaba' => 'nullable|string|max:100',
             'contenido_B_DulceBocadilloGuayaba' => 'nullable|string|max:100',
             'pais_B_DulceBocadilloGuayaba' => 'nullable|string|max:100',

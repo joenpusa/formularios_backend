@@ -35,7 +35,8 @@ class CtVerificacionRotuladoRi extends Model
         'cargo_atiende',
         'telefono_atiende',
         'filas_5109',
-        'filas_810'
+        'filas_810',
+        'porcentaje',
     ];
 
     protected $casts = [
