@@ -30,6 +30,7 @@ use App\Models\CtSeguimientoLocal;
 use App\Models\CtSeguimientoRotulado;
 
 use App\Models\Pqr;
+use App\Models\Attachment;
 
 
 class ReporteController extends Controller
@@ -483,11 +484,18 @@ class ReporteController extends Controller
                 ], 404);
             }
 
+            //agrgar las imagenes que cargaron
+            $imagenes = Attachment::where('form_name', $tipoReporte)
+            ->where('form_id', $id)
+            ->get()
+            ->map(function ($archivo) {
+                return public_path('storage/' . $archivo->file_path);
+            });
             // Seleccionar la vista según el tipo de reporte
             $vista = "export.{$tipoReporte}_pdf";
 
             // Generar el PDF
-            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($vista, compact('registro'));
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($vista, compact('registro', 'imagenes'));
 
             $pdfContent = $pdf->output();
 

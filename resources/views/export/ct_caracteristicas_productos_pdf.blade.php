@@ -490,6 +490,17 @@
                     <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
             </tbody>
         </table>
+        @if ($imagenes->isNotEmpty())
+            <h3>Archivos Adjuntos</h3>
+            @foreach ($imagenes as $imagen)
+                <img src="{{ public_path($imagen->file_path) }}" style="width: 400px; padding: 5px" />
+                {{-- <div style="text-align: center; margin-bottom: 10px;">
+                    <img src="{{ public_path($imagen->file_path) }}" alt="{{ $imagen->original_name }}"
+                        style="width: 100%; max-width: 600px;">
+                </div> --}}
+            @endforeach
+        @endif
+
     </div>
 </body>
 

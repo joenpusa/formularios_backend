@@ -20,6 +20,10 @@
             font-family: Calibri, sans-serif;
         }
 
+        .col-peque {
+            width: 10%;
+        }
+
         th,
         td {
             border: 1px solid black;
@@ -96,9 +100,9 @@
                 </tr>
                 <tr>
                     <td colspan="2">Fecha de la última visita de la Autoridad Sanitaria:</td>
-                    <td colspan="2">{{ $registro->fecha_ultima_visita }}</td>
+                    <td colspan="2">{{ $registro->fecha_ultima_visita ?? 'No observado' }}</td>
                     <td colspan="2">Concepto emitido</td>
-                    <td colspan="3">{{ $registro->concepto_emitido }}</td>
+                    <td colspan="3">{{ $registro->concepto_emitido ?? 'No observado' }}</td>
                 </tr>
             </tbody>
         </table>
@@ -157,9 +161,9 @@
                     </th>
                 </tr>
                 <tr class="table-info">
-                    <th>N°</th>
+                    <th class="col-peque">N°</th>
                     <th>Aspectos a evaluar</th>
-                    <th>Criterio</th>
+                    <th class="col-peque">Criterio</th>
                     <th>Observaciones</th>
                 </tr>
                 <tr>
@@ -1100,9 +1104,9 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>N°</th>
+                    <th class="col-peque">N°</th>
                     <th>Aspectos a evaluar</th>
-                    <th>Cumple/No cumple</th>
+                    <th class="col-peque">Cumple/No cumple</th>
                     <th>Observaciones</th>
                 </tr>
             </thead>
@@ -1387,6 +1391,12 @@
                     <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
             </tbody>
         </table>
+        @if ($imagenes->isNotEmpty())
+            <h3>Archivos Adjuntos</h3>
+            @foreach ($imagenes as $imagen)
+                <img src="{{ $imagen }}" style="width: 400px; padding: 5px" />
+            @endforeach
+        @endif
     </div>
 </body>
 
