@@ -45,7 +45,7 @@ class CtVerificacionCct extends Model
         'tb_verificacion4_6', 'tb_verificacion4_7', 'tb_verificacion4_8', 'tb_verificacion4_9',
         'tb_verificacion5_1', 'tb_verificacion5_2', 'tb_verificacion5_3', 'tb_verificacion5_4',
         'tb_verificacion5_5', 'tb_verificacion5_6', 'tb_verificacion5_7', 'tb_verificacion5_8',
-        'tb_verificacion5_9', 'indicador1', 'indicador2', 'indicador3', 'proteico1', 'proteico2',
+        'tb_verificacion5_9', 'indicador1', 'indicador2', 'indicador3','indicador4', 'proteico1', 'proteico2',
         'proteico3', 'proteico4', 'proteico5', 'proteico6', 'proteico7', 'proteico8', 'leguminosa1',
         'leguminosa2', 'leguminosa3', 'leguminosa4', 'leguminosa5', 'leguminosa6', 'leguminosa7',
         'leguminosa8', 'cereal1', 'cereal2', 'cereal3', 'cereal4', 'cereal5', 'cereal6', 'cereal7',
