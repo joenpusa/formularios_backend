@@ -1091,7 +1091,10 @@
                         <strong>INDICADOR:</strong> Porcentaje de cumplimiento de
                         condiciones operativas
                     </td>
-                    <td colspan="4">
+                    <td colspan="2">
+                        % de Cumplimiento
+                    </td>
+                    <td colspan="2">
                         {{ $registro->indicador1 }}
                     </td>
                 </tr>
@@ -1349,6 +1352,189 @@
                     </td>
                     <td colspan="3">
                         {{ $registro->indicador3 }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Tabla preguntas 60-73 -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Aspectos a evaluar</th>
+                    <th>Cumple/No cumple</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>61</td>
+                    <td>
+                        El personal manipulador y transportador cuenta con la documentación exigida para manipular
+                        alimentos de acuerdo a lo establecido en la Resolución 2674 de 2013 y ésta se encuentra vigente.
+                    </td>
+                    <td>
+                        {{ $registro->pre_61 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_61_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>62</td>
+                    <td>
+                        Cuenta con la dotación completa, limpia, en buen estado y hace uso adecuado de la misma de
+                        acuerdo a lo establecido en la normatividad vigente.
+                    </td>
+                    <td>
+                        {{ $registro->pre_62 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_62_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>63</td>
+                    <td>
+                        El personal manipulador y transportador cumple con las buenas prácticas de manufactura en las
+                        diferentes etapas del proceso, según lo establecido en la normatividad legal vigente.
+                    </td>
+                    <td>
+                        {{ $registro->pre_63 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_63_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>64</td>
+                    <td>
+                        Los vehículos para el transporte de las canastillas que contienen los portacomidas cumplen con
+                        la normatividad sanitaria vigente (Resolución 2674 de 2013) y los lineamientos determinados para
+                        transporte de alimentos establecidos por el Ministerio de Transporte.
+                    </td>
+                    <td>
+                        {{ $registro->pre_64 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_64_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>65</td>
+                    <td>
+                        El vehículo cuenta con certificación sanitaria expedida por la autoridad competente con concepto
+                        favorable.
+                    </td>
+                    <td>
+                        {{ $registro->pre_65 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_65_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>66</td>
+                    <td>
+                        Las Canastillas y/o equipos donde son transportados los alimentos se encuentran limpias, en buen
+                        estado y son de material resistente.
+                    </td>
+                    <td>
+                        {{ $registro->pre_66 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_66_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>67</td>
+                    <td>
+                        La cantidad de complementos alimentarios entregados se ajusta a las cantidades definidas para la
+                        sede educativa.
+                    </td>
+                    <td>
+                        {{ $registro->pre_67 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_67_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>68</td>
+                    <td>
+                        Durante el descargue y entrega de los complementos alimentarios en la sede educativa se
+                        evidencia adecuadas practicas de manufactura.
+                    </td>
+                    <td>
+                        {{ $registro->pre_68 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_68_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>69</td>
+                    <td>
+                        Los complementos alimentarios son entregados a las sedes educativas cumpliendo con los horarios
+                        establecidos para el consumo.
+                    </td>
+                    <td>
+                        {{ $registro->pre_69 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_69_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>70</td>
+                    <td>
+                        Los portacomidas y vasos herméticos donde vienen ensamblados o contenidos los complementos
+                        alimentarios se encuentran en buen estado.
+                    </td>
+                    <td>
+                        {{ $registro->pre_70 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_70_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>71</td>
+                    <td>
+                        Las áreas para la distribución y consumo de los complementos alimentarios se encuentran en
+                        adecuadas condiciones higiénicas y físicas.
+                    </td>
+                    <td>
+                        {{ $registro->pre_71 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_71_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>72</td>
+                    <td>
+                        Se dispone del menaje suficiente de acuerdo al número de beneficiarios establecidos y se
+                        encuentran en adecuadas condiciones físicas e higiénicas.
+                    </td>
+                    <td>
+                        {{ $registro->pre_72 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_72_obs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>73</td>
+                    <td>
+                        Durante el consumo de los complementos alimentarios no se presentan novedades relacionadas con
+                        la calidad (sensorial, inocuidad, entre otros) y cantidad de los complementos alimentarios.
+                    </td>
+                    <td>
+                        {{ $registro->pre_73 }}
+                    </td>
+                    <td>
+                        {{ $registro->pre_73_obs }}
                     </td>
                 </tr>
             </tbody>
