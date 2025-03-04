@@ -104,66 +104,69 @@
                     <td>{{ $registro->tematica }}</td>
                 </tr>
             </tbody>
-            <!-- tabla de estudantes -->
-            <table class="table table-bordered">
-                <thead class="text-center">
+        </table>
+        <!-- tabla de estudantes -->
+        <table class="table table-bordered">
+            <thead class="text-center">
+                <tr>
+                    <th>#</th>
+                    <th>Nombres y apellidos</th>
+                    <th>Grado escolar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (json_decode($registro->filas, true) as $fila)
+                    {{ $n = 1 }}
                     <tr>
-                        <th>#</th>
-                        <th>Nombres y apellidos</th>
-                        <th>Grado escolar</th>
+                        <td>{{ $n }}</td>
+                        <td>{{ $fila['nombre'] }}</td>
+                        <td>{{ $fila['grado'] }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (json_decode($registro->filas, true) as $fila)
-                        {{ $n = 1 }}
-                        <tr>
-                            <td>{{ $n }}</td>
-                            <td>{{ $fila['nombre'] }}</td>
-                            <td>{{ $fila['grado'] }}</td>
-                        </tr>
-                        {{ $n = $n + 1 }}
-                    @endforeach
-                    <tr>
-                        <td colspan="2">Total de beneficiarios:</td>
-                        <td>{{ $registro->num_beneficiarios }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- TABLA DE FIRMAS -->
-            <table class="table table-bordered">
-                <tbody>
-
-                    <tr>
-                        <th>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</th>
-                        <th>FIRMA QUIEN ATIENDE LA VISITA</th>
-                    </tr>
-                    <tr>
-                        <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>
-                        <td><img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" /></td>
-                    </tr>
-                    <tr>
-                        <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
-                        <td>NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
-                        <td>CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
-                        <td>CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
-                        <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
-                </tbody>
-            </table>
-            @if ($imagenes->isNotEmpty())
-                <h3>Archivos Adjuntos</h3>
-                @foreach ($imagenes as $imagen)
-                    <img src="{{ $imagen }}" style="width: 400px; padding: 5px" />
+                    {{ $n = $n + 1 }}
                 @endforeach
-            @endif
+                <tr>
+                    <td colspan="2">Total de beneficiarios:</td>
+                    <td>{{ $registro->num_beneficiarios }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- TABLA DE FIRMAS -->
+        <table class="table table-bordered">
+            <tbody>
+
+                <tr>
+                    <th>FIRMA EQUIPO PAE /APOYO A LA SUPERVISIÓN</th>
+                    <th>FIRMA QUIEN ATIENDE LA VISITA</th>
+                </tr>
+                <tr>
+                    <td><img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" /></td>
+                    <td><img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" /></td>
+                </tr>
+                <tr>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
+                    <td>NOMBRE: <strong>{{ $registro->nombre_atiende }}</strong></td>
+                </tr>
+                <tr>
+                    <td>CEDULA: <strong>{{ $registro->cedula_apoyo }}</strong></td>
+                    <td>CEDULA: <strong>{{ $registro->cedula_atiende }}</strong></td>
+                </tr>
+                <tr>
+                    <td>CARGO: <strong>{{ $registro->cargo_apoyo }}</strong></td>
+                    <td>CARGO: <strong>{{ $registro->cargo_atiende }}</strong></td>
+                </tr>
+                <tr>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_apoyo }}</strong></td>
+                    <td>TELEFONO: <strong>{{ $registro->telefono_atiende }}</strong></td>
+            </tbody>
+        </table>
+        <br>
+        @if ($imagenes->isNotEmpty())
+            <h3>Archivos Adjuntos</h3>
+            @foreach ($imagenes as $imagen)
+                <img src="{{ $imagen }}" style="width: 400px; padding: 5px" />
+                <br>
+            @endforeach
+        @endif
     </div>
 </body>
 

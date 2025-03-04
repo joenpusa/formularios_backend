@@ -459,9 +459,9 @@
                     <td>20</td>
                     <td>
                         Se realiza la limpieza y desinfección periódica del tanque
-                        de almacenamiento de agua potable. Fecha de la última
-                        limpieza y desinfección realizada:
-                        {{ $registro->fecha_ultima_limpieza }}
+                        de almacenamiento de agua potable.
+                        {{-- Fecha de la última limpieza y desinfección realizada:
+                        {{ $registro->fecha_ultima_limpieza }} --}}
                     </td>
                     <td>
                         {{ $registro->condi_20 }}
