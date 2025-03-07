@@ -492,13 +492,21 @@
         </table>
         @if ($imagenes->isNotEmpty())
             <h3>Archivos Adjuntos</h3>
-            @foreach ($imagenes as $imagen)
-                <img src="{{ public_path($imagen->file_path) }}" style="width: 400px; padding: 5px" />
-                {{-- <div style="text-align: center; margin-bottom: 10px;">
-                    <img src="{{ public_path($imagen->file_path) }}" alt="{{ $imagen->original_name }}"
-                        style="width: 100%; max-width: 600px;">
-                </div> --}}
-            @endforeach
+            <table style="width: 100%; border-collapse: collapse;">
+                @foreach ($imagenes->chunk(2) as $fila)
+                    <tr>
+                        @foreach ($fila as $imagen)
+                            <td style="text-align: center; padding: 5px; width: 50%;">
+                                <img src="{{ $imagen }}"
+                                    style="max-width: 350px; max-height: 350px; object-fit: contain;" />
+                            </td>
+                        @endforeach
+                        @if ($fila->count() == 1)
+                            <td style="width: 50%;"></td> {{-- Celda vacía si hay un número impar de imágenes --}}
+                        @endif
+                    </tr>
+                @endforeach
+            </table>
         @endif
 
     </div>
