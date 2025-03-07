@@ -152,9 +152,21 @@
         </table>
         @if ($imagenes->isNotEmpty())
             <h3>Archivos Adjuntos</h3>
-            @foreach ($imagenes as $imagen)
-                <img src="{{ $imagen }}" style="width: 400px; padding: 5px" />
-            @endforeach
+            <table style="width: 100%; border-collapse: collapse;">
+                @foreach ($imagenes->chunk(2) as $fila)
+                    <tr>
+                        @foreach ($fila as $imagen)
+                            <td style="text-align: center; padding: 5px; width: 50%;">
+                                <img src="{{ $imagen }}"
+                                    style="max-width: 350px; max-height: 350px; object-fit: contain;" />
+                            </td>
+                        @endforeach
+                        @if ($fila->count() == 1)
+                            <td style="width: 50%;"></td> {{-- Celda vacía si hay un número impar de imágenes --}}
+                        @endif
+                    </tr>
+                @endforeach
+            </table>
         @endif
     </div>
 </body>
