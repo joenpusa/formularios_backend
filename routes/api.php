@@ -24,9 +24,12 @@ use App\Http\Controllers\CtVerificacionRotuladoRiController;
 use App\Http\Controllers\CtVerificacionModalidadRiController;
 use App\Http\Controllers\CtSeguimientoRotuladoController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\EncuestaSatisfaccionController;
+
 
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/encuestas', [EncuestaSatisfaccionController::class, 'store']);
 
 // Rutas protegidas
 Route::middleware('auth:sanctum')->group(function () {
