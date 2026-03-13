@@ -23,6 +23,7 @@ use App\Http\Controllers\CtVerificacionModalidadRpsController;
 use App\Http\Controllers\CtVerificacionRotuladoRiController;
 use App\Http\Controllers\CtVerificacionModalidadRiController;
 use App\Http\Controllers\CtSeguimientoRotuladoController;
+use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\EncuestaSatisfaccionController;
 
@@ -43,7 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-     // Formatos
+    // Formatos
     Route::apiResource('formatos', FormatoController::class);
 
     // Rutas para usuarios
@@ -83,6 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('ct_seguimiento_rotulado', CtSeguimientoRotuladoController::class);
     // tutas generales
     Route::apiResource('pqrs', PqrController::class);
+    Route::post('/diagnostico', [DiagnosticoController::class, 'store']);
     // rutas para reportes
     Route::post('/reporte/datos', [ReporteController::class, 'obtenerDatos']);
     Route::post('/reporte/excel', [ReporteController::class, 'generarExcel']);

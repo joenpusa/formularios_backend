@@ -31,6 +31,7 @@ use App\Models\CtSeguimientoRotulado;
 
 use App\Models\Pqr;
 use App\Models\Attachment;
+use App\Models\Diagnostico;
 
 
 class ReporteController extends Controller
@@ -50,13 +51,13 @@ class ReporteController extends Controller
 
         // Construir la primera consulta con JOIN
         $query1 = SocialVisita::select(
-                'municipios.nombre as municipio',
-                'instituciones.nombre as institucion',
-                'users.name as creado_por',
-                'social_visitas.fechaVisita as fecha_visita',
-                'social_visitas.id',
-                DB::raw('"social_visitas" as tipo_reporte')
-            )
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'social_visitas.fechaVisita as fecha_visita',
+            'social_visitas.id',
+            DB::raw('"social_visitas" as tipo_reporte')
+        )
             ->join('municipios', 'social_visitas.municipio', '=', 'municipios.id')
             ->join('instituciones', 'social_visitas.institucion', '=', 'instituciones.id')
             ->join('users', 'social_visitas.created_by', '=', 'users.id')
@@ -72,21 +73,21 @@ class ReporteController extends Controller
 
         // Segunda consulta
         $query2 = SocialVerificacion::select(
-                'municipios.nombre as municipio',
-                'instituciones.nombre as institucion',
-                'users.name as creado_por',
-                'social_verificaciones.fecha_visita',
-                'social_verificaciones.id',
-                DB::raw('"social_verificaciones" as tipo_reporte')
-            )
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'social_verificaciones.fecha_visita',
+            'social_verificaciones.id',
+            DB::raw('"social_verificaciones" as tipo_reporte')
+        )
             ->join('municipios', 'social_verificaciones.municipio', '=', 'municipios.id')
             ->join('instituciones', 'social_verificaciones.institucion', '=', 'instituciones.id')
             ->join('users', 'social_verificaciones.created_by', '=', 'users.id')
             ->whereBetween('social_verificaciones.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query1);
 
-            if (is_numeric($municipioId)) {
-                $query2->where('social_verificaciones.municipio', $municipioId);
+        if (is_numeric($municipioId)) {
+            $query2->where('social_verificaciones.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
             $query2->where('social_verificaciones.created_by', $usuarioId);
@@ -94,22 +95,22 @@ class ReporteController extends Controller
 
         // Tercera consulta
         $query3 = SocialAsistencia::select(
-                'municipios.nombre as municipio',
-                'instituciones.nombre as institucion',
-                'users.name as creado_por',
-                'social_asistencias.fecha_visita',
-                'social_asistencias.id',
-                DB::raw('"social_asistencias" as tipo_reporte')
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'social_asistencias.fecha_visita',
+            'social_asistencias.id',
+            DB::raw('"social_asistencias" as tipo_reporte')
 
-            )
+        )
             ->join('municipios', 'social_asistencias.municipio', '=', 'municipios.id')
             ->join('instituciones', 'social_asistencias.institucion', '=', 'instituciones.id')
             ->join('users', 'social_asistencias.created_by', '=', 'users.id')
             ->whereBetween('social_asistencias.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query2);
 
-            if (is_numeric($municipioId)) {
-                $query3->where('social_asistencias.municipio', $municipioId);
+        if (is_numeric($municipioId)) {
+            $query3->where('social_asistencias.municipio', $municipioId);
         }
         if (!empty($usuarioId)) {
             $query3->where('social_asistencias.created_by', $usuarioId);
@@ -124,11 +125,11 @@ class ReporteController extends Controller
             DB::raw('"ct_verificacion_materia_prima" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_verificacion_materia_prima.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_verificacion_materia_prima.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_verificacion_materia_prima.created_by', '=', 'users.id')
-        ->whereBetween('ct_verificacion_materia_prima.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query3);
+            ->join('municipios', 'ct_verificacion_materia_prima.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_verificacion_materia_prima.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_verificacion_materia_prima.created_by', '=', 'users.id')
+            ->whereBetween('ct_verificacion_materia_prima.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query3);
 
         if (is_numeric($municipioId)) {
             $query4->where('ct_verificacion_materia_prima.municipio', $municipioId);
@@ -146,11 +147,11 @@ class ReporteController extends Controller
             DB::raw('"ct_verificacion_materia_prima_ps" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_verificacion_materia_prima_ps.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_verificacion_materia_prima_ps.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_verificacion_materia_prima_ps.created_by', '=', 'users.id')
-        ->whereBetween('ct_verificacion_materia_prima_ps.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query4);
+            ->join('municipios', 'ct_verificacion_materia_prima_ps.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_verificacion_materia_prima_ps.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_verificacion_materia_prima_ps.created_by', '=', 'users.id')
+            ->whereBetween('ct_verificacion_materia_prima_ps.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query4);
 
         if (is_numeric($municipioId)) {
             $query5->where('ct_verificacion_materia_prima_ps.municipio', $municipioId);
@@ -168,11 +169,11 @@ class ReporteController extends Controller
             DB::raw('"ct_verificacion_cct" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_verificacion_cct.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_verificacion_cct.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_verificacion_cct.created_by', '=', 'users.id')
-        ->whereBetween('ct_verificacion_cct.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query5);
+            ->join('municipios', 'ct_verificacion_cct.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_verificacion_cct.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_verificacion_cct.created_by', '=', 'users.id')
+            ->whereBetween('ct_verificacion_cct.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query5);
 
         if (is_numeric($municipioId)) {
             $query6->where('ct_verificacion_cct.municipio', $municipioId);
@@ -190,11 +191,11 @@ class ReporteController extends Controller
             DB::raw('"ct_verificacion_modalidad_rps" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_verificacion_modalidad_rps.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_verificacion_modalidad_rps.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_verificacion_modalidad_rps.created_by', '=', 'users.id')
-        ->whereBetween('ct_verificacion_modalidad_rps.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query6);
+            ->join('municipios', 'ct_verificacion_modalidad_rps.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_verificacion_modalidad_rps.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_verificacion_modalidad_rps.created_by', '=', 'users.id')
+            ->whereBetween('ct_verificacion_modalidad_rps.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query6);
 
         if (is_numeric($municipioId)) {
             $query7->where('ct_verificacion_modalidad_rps.municipio', $municipioId);
@@ -212,11 +213,11 @@ class ReporteController extends Controller
             DB::raw('"ct_verificacion_rotulado_ri" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_verificacion_rotulado_ri.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_verificacion_rotulado_ri.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_verificacion_rotulado_ri.created_by', '=', 'users.id')
-        ->whereBetween('ct_verificacion_rotulado_ri.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query7);
+            ->join('municipios', 'ct_verificacion_rotulado_ri.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_verificacion_rotulado_ri.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_verificacion_rotulado_ri.created_by', '=', 'users.id')
+            ->whereBetween('ct_verificacion_rotulado_ri.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query7);
 
         if (is_numeric($municipioId)) {
             $query8->where('ct_verificacion_rotulado_ri.municipio', $municipioId);
@@ -234,11 +235,11 @@ class ReporteController extends Controller
             DB::raw('"ct_verificacion_modalidad_ri" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_verificacion_modalidad_ri.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_verificacion_modalidad_ri.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_verificacion_modalidad_ri.created_by', '=', 'users.id')
-        ->whereBetween('ct_verificacion_modalidad_ri.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query8);
+            ->join('municipios', 'ct_verificacion_modalidad_ri.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_verificacion_modalidad_ri.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_verificacion_modalidad_ri.created_by', '=', 'users.id')
+            ->whereBetween('ct_verificacion_modalidad_ri.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query8);
 
         if (is_numeric($municipioId)) {
             $query9->where('ct_verificacion_modalidad_ri.municipio', $municipioId);
@@ -256,10 +257,10 @@ class ReporteController extends Controller
             DB::raw('"ct_seguimiento_etiquetados" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_seguimiento_etiquetados.municipio', '=', 'municipios.id')
-        ->join('users', 'ct_seguimiento_etiquetados.created_by', '=', 'users.id')
-        ->whereBetween('ct_seguimiento_etiquetados.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query9);
+            ->join('municipios', 'ct_seguimiento_etiquetados.municipio', '=', 'municipios.id')
+            ->join('users', 'ct_seguimiento_etiquetados.created_by', '=', 'users.id')
+            ->whereBetween('ct_seguimiento_etiquetados.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query9);
 
         if (is_numeric($municipioId)) {
             $query10->where('ct_seguimiento_etiquetados.municipio', $municipioId);
@@ -277,10 +278,10 @@ class ReporteController extends Controller
             DB::raw('"ct_caracteristicas_productos" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_caracteristicas_productos.municipio', '=', 'municipios.id')
-        ->join('users', 'ct_caracteristicas_productos.created_by', '=', 'users.id')
-        ->whereBetween('ct_caracteristicas_productos.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query10);
+            ->join('municipios', 'ct_caracteristicas_productos.municipio', '=', 'municipios.id')
+            ->join('users', 'ct_caracteristicas_productos.created_by', '=', 'users.id')
+            ->whereBetween('ct_caracteristicas_productos.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query10);
 
         if (is_numeric($municipioId)) {
             $query11->where('ct_caracteristicas_productos.municipio', $municipioId);
@@ -298,11 +299,11 @@ class ReporteController extends Controller
             DB::raw('"ct_toma_muestras" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_toma_muestras.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_toma_muestras.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_toma_muestras.created_by', '=', 'users.id')
-        ->whereBetween('ct_toma_muestras.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query11);
+            ->join('municipios', 'ct_toma_muestras.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_toma_muestras.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_toma_muestras.created_by', '=', 'users.id')
+            ->whereBetween('ct_toma_muestras.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query11);
 
         if (!empty($municipioId)) {
             $query12->where('ct_toma_muestras.municipio', $municipioId);
@@ -320,10 +321,10 @@ class ReporteController extends Controller
             DB::raw('"ct_etapa_alistamiento" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_etapa_alistamiento.municipio', '=', 'municipios.id')
-        ->join('users', 'ct_etapa_alistamiento.created_by', '=', 'users.id')
-        ->whereBetween('ct_etapa_alistamiento.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query12);
+            ->join('municipios', 'ct_etapa_alistamiento.municipio', '=', 'municipios.id')
+            ->join('users', 'ct_etapa_alistamiento.created_by', '=', 'users.id')
+            ->whereBetween('ct_etapa_alistamiento.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query12);
 
         if (is_numeric($municipioId)) {
             $query13->where('ct_etapa_alistamiento.municipio', $municipioId);
@@ -341,10 +342,10 @@ class ReporteController extends Controller
             DB::raw('"ct_etapa_operaciones" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_etapa_operaciones.municipio', '=', 'municipios.id')
-        ->join('users', 'ct_etapa_operaciones.created_by', '=', 'users.id')
-        ->whereBetween('ct_etapa_operaciones.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query13);
+            ->join('municipios', 'ct_etapa_operaciones.municipio', '=', 'municipios.id')
+            ->join('users', 'ct_etapa_operaciones.created_by', '=', 'users.id')
+            ->whereBetween('ct_etapa_operaciones.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query13);
 
         if (is_numeric($municipioId)) {
             $query14->where('ct_etapa_operaciones.municipio', $municipioId);
@@ -362,11 +363,11 @@ class ReporteController extends Controller
             DB::raw('"ct_seguimiento_locales" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_seguimiento_locales.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_seguimiento_locales.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_seguimiento_locales.created_by', '=', 'users.id')
-        ->whereBetween('ct_seguimiento_locales.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query14);
+            ->join('municipios', 'ct_seguimiento_locales.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_seguimiento_locales.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_seguimiento_locales.created_by', '=', 'users.id')
+            ->whereBetween('ct_seguimiento_locales.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query14);
 
         if (is_numeric($municipioId)) {
             $query15->where('ct_seguimiento_locales.municipio', $municipioId);
@@ -384,11 +385,11 @@ class ReporteController extends Controller
             DB::raw('"ct_seguimiento_rotulado" as tipo_reporte')
 
         )
-        ->join('municipios', 'ct_seguimiento_rotulado.municipio', '=', 'municipios.id')
-        ->join('instituciones', 'ct_seguimiento_rotulado.institucion', '=', 'instituciones.id')
-        ->join('users', 'ct_seguimiento_rotulado.created_by', '=', 'users.id')
-        ->whereBetween('ct_seguimiento_rotulado.fecha_visita', [$fechaInicio, $fechaFin])
-        ->union($query15);
+            ->join('municipios', 'ct_seguimiento_rotulado.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'ct_seguimiento_rotulado.institucion', '=', 'instituciones.id')
+            ->join('users', 'ct_seguimiento_rotulado.created_by', '=', 'users.id')
+            ->whereBetween('ct_seguimiento_rotulado.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query15);
 
         if (!empty($municipioId)) {
             $query16->where('ct_seguimiento_rotulado.municipio', $municipioId);
@@ -397,8 +398,30 @@ class ReporteController extends Controller
             $query16->where('ct_seguimiento_rotulado.created_by', $usuarioId);
         }
 
+        $query17 = Diagnostico::select(
+            'municipios.nombre as municipio',
+            'instituciones.nombre as institucion',
+            'users.name as creado_por',
+            'diagnosticos.fecha_visita',
+            'diagnosticos.id',
+            DB::raw('"diagnosticos" as tipo_reporte')
+
+        )
+            ->join('municipios', 'diagnosticos.municipio', '=', 'municipios.id')
+            ->join('instituciones', 'diagnosticos.institucion', '=', 'instituciones.id')
+            ->join('users', 'diagnosticos.created_by', '=', 'users.id')
+            ->whereBetween('diagnosticos.fecha_visita', [$fechaInicio, $fechaFin])
+            ->union($query16);
+
+        if (!empty($municipioId)) {
+            $query17->where('diagnosticos.municipio', $municipioId);
+        }
+        if (!empty($usuarioId)) {
+            $query17->where('diagnosticos.created_by', $usuarioId);
+        }
+
         // Obtener los resultados ordenados y con paginación
-        $registros = $query16->orderBy('fecha_visita', 'desc')->get();
+        $registros = $query17->orderBy('fecha_visita', 'desc')->get();
 
         return response()->json($registros);
     }
@@ -447,6 +470,7 @@ class ReporteController extends Controller
                 'ct_toma_muestras' => CtTomaMuestra::class,
                 'ct_etapa_operaciones' => CtEtapaOperacion::class,
                 'ct_seguimiento_locales' => CtSeguimientoLocal::class,
+                'diagnosticos' => Diagnostico::class,
             ];
 
             // Verificar si el tipo de reporte es válido
@@ -486,11 +510,11 @@ class ReporteController extends Controller
 
             //agrgar las imagenes que cargaron
             $imagenes = Attachment::where('form_name', $tipoReporte)
-            ->where('form_id', $id)
-            ->get()
-            ->map(function ($archivo) {
-                return public_path('storage/' . $archivo->file_path);
-            });
+                ->where('form_id', $id)
+                ->get()
+                ->map(function ($archivo) {
+                    return public_path('storage/' . $archivo->file_path);
+                });
             // Seleccionar la vista según el tipo de reporte
             $vista = "export.{$tipoReporte}_pdf";
 
@@ -514,14 +538,14 @@ class ReporteController extends Controller
     private function getData($tipo)
     {
         // switch ($tipo) {
-            // case 'usuarios':
-            //     return User::select('id', 'name', 'email', 'created_at')->get();
-            // case 'ventas':
-            //     return Venta::select('id', 'cliente', 'monto', 'fecha')->get();
-            // case 'productos':
-            //     return Producto::select('id', 'nombre', 'precio', 'stock')->get();
-            // default:
-                return collect([]);
+        // case 'usuarios':
+        //     return User::select('id', 'name', 'email', 'created_at')->get();
+        // case 'ventas':
+        //     return Venta::select('id', 'cliente', 'monto', 'fecha')->get();
+        // case 'productos':
+        //     return Producto::select('id', 'nombre', 'precio', 'stock')->get();
+        // default:
+        return collect([]);
         // }
     }
 }
