@@ -407,9 +407,9 @@ class ReporteController extends Controller
             DB::raw('"diagnosticos" as tipo_reporte')
 
         )
-            ->join('municipios', 'diagnosticos.municipio', '=', 'municipios.id')
-            ->join('instituciones', 'diagnosticos.institucion', '=', 'instituciones.id')
-            ->join('users', 'diagnosticos.created_by', '=', 'users.id')
+            ->leftJoin('municipios', 'diagnosticos.municipio', '=', 'municipios.id')
+            ->leftJoin('instituciones', 'diagnosticos.institucion', '=', 'instituciones.id')
+            ->leftJoin('users', 'diagnosticos.created_by', '=', 'users.id')
             ->whereBetween('diagnosticos.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query16);
 
@@ -509,12 +509,19 @@ class ReporteController extends Controller
             }
 
             //agrgar las imagenes que cargaron
-            $imagenes = Attachment::where('form_name', $tipoReporte)
+            $formNameSearch = ($tipoReporte === 'diagnosticos') ? 'diagnostico' : $tipoReporte;
+            $imagenes = Attachment::where('form_name', $formNameSearch)
                 ->where('form_id', $id)
                 ->get()
                 ->map(function ($archivo) {
-                    return public_path('storage/' . $archivo->file_path);
-                });
+                    $path = storage_path('app/public/' . $archivo->file_path);
+                    if (file_exists($path)) {
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        return 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    }
+                    return null;
+                })->filter();
             // Seleccionar la vista según el tipo de reporte
             $vista = "export.{$tipoReporte}_pdf";
 
