@@ -421,9 +421,16 @@ class ReporteController extends Controller
         }
 
         // Obtener los resultados ordenados y con paginación
-        $registros = $query17->orderBy('fecha_visita', 'desc')->get();
-
-        return response()->json($registros);
+        try {
+            $registros = $query17->orderBy('fecha_visita', 'desc')->get();
+            return response()->json($registros);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error_message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ], 500);
+        }
     }
 
     public function generarExcel(Request $request)
