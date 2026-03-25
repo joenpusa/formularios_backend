@@ -436,6 +436,17 @@ class ReporteController extends Controller
     public function generarExcel(Request $request)
     {
         $tipo = $request->input('tipo');
+        \Illuminate\Support\Facades\Log::info("generarExcel payload: " . json_encode($request->all()));
+
+        if ($tipo === 'diagnosticos') {
+            $fechaInicio = $request->input('fecha_inicio', '2000-01-01');
+            $fechaFin = $request->input('fecha_fin', '2100-12-31');
+            $municipio = $request->input('municipio');
+            $usuario = $request->input('usuario');
+
+            $fileName = "Reporte_Diagnostico_" . date('Ymd_His') . ".xlsx";
+            return Excel::download(new \App\Exports\DiagnosticoExport($fechaInicio, $fechaFin, $municipio, $usuario), $fileName);
+        }
 
         if (!in_array($tipo, ['usuarios', 'ventas', 'productos'])) {
             return response()->json(['error' => 'Tipo de reporte inválido'], 400);
@@ -443,7 +454,7 @@ class ReporteController extends Controller
 
         $fileName = "Reporte_{$tipo}_" . date('Ymd_His') . ".xlsx";
 
-        return Excel::download(new ReporteExport($tipo), $fileName);
+        return Excel::download(new \App\Exports\ReporteExport($tipo), $fileName);
     }
 
     public function generarIndividual(Request $request)
