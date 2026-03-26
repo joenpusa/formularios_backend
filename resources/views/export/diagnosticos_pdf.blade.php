@@ -112,31 +112,35 @@
                     <td>{{ $registro->tipo_complemento }}</td>
                 </tr>
                 <tr>
-                    <td>Modalidades de Atención del Servicio:</td>
+                    <td>Modalidades de Atención del Servicio que actualmente se presta:</td>
                     <td>{{ $registro->modalidad_atencion }}</td>
                 </tr>
                 <tr>
-                    <td>¿Tiene área para comedor (Industrializada)?:</td>
+                    <td>Si la I.E. o sede es modalidad industrializada, ¿tiene algún área que se pueda utilizar como
+                        comedor?:</td>
                     <td>{{ $registro->ind_area_comedor }}</td>
                 </tr>
                 <tr>
-                    <td>¿Tiene área para producción (Industrializada)?:</td>
+                    <td>Si la I.E. o sede es modalidad es industrializada, ¿tiene área que se pueda utilizar para
+                        producción (cocina), con dotación de mesones y lavaplatos?:</td>
                     <td>{{ $registro->ind_area_produccion }}</td>
                 </tr>
                 <tr>
-                    <td>¿Tiene servicio de agua potable en la sede?:</td>
+                    <td>Si la I.E. o sede es modalidad es industrializada, ¿tiene acceso a agua potable?:</td>
                     <td>{{ $registro->ind_agua_potable }}</td>
                 </tr>
                 <tr>
-                    <td>¿Está cerca de fuentes de contaminación?:</td>
+                    <td>¿La sede está cerca de potenciales fuentes de contaminación (basureros, mataderos, pantanos,
+                        etc.)?:</td>
                     <td>{{ $registro->cerca_contaminacion }}</td>
                 </tr>
                 <tr>
-                    <td>¿Está en zona de conflicto?:</td>
+                    <td>¿La sede educativa está ubicada en zona de conflicto armado e inestabilidad social?:</td>
                     <td>{{ $registro->zona_conflicto }}</td>
                 </tr>
                 <tr>
-                    <td>Frecuencia del conflicto:</td>
+                    <td>¿Con qué frecuencia las dinámicas de conflicto armado e inestabilidad social afectan la
+                        Operación o entrega del PAE?:</td>
                     <td>{{ $registro->frecuencia_conflicto }}</td>
                 </tr>
 
@@ -144,61 +148,61 @@
                     <th colspan="2">2. INFRAESTRUCTURA DE LA SEDE</th>
                 </tr>
                 <tr>
-                    <td>Área exclusiva para almacenamiento:</td>
+                    <td>¿La sede tiene un espacio dedicado al almacenamiento de alimentos?:</td>
                     <td>{{ $registro->esp_almacenamiento }}</td>
                 </tr>
                 <tr>
-                    <td>Material techo (almacenamiento):</td>
+                    <td>El material predominante del techo en ese lugar es (almacenamiento):</td>
                     <td>{{ $registro->mat_techo_alm }}</td>
                 </tr>
                 <tr>
-                    <td>Material piso (almacenamiento):</td>
+                    <td>El material predominante del piso en ese lugar es (almacenamiento):</td>
                     <td>{{ $registro->mat_piso_alm }}</td>
                 </tr>
                 <tr>
-                    <td>Material paredes (almacenamiento):</td>
+                    <td>El material predominante de las paredes en ese lugar es (almacenamiento):</td>
                     <td>{{ $registro->mat_paredes_alm }}</td>
                 </tr>
                 <tr>
-                    <td>Estado general del área de almacenamiento:</td>
+                    <td>¿En qué estado se encuentra el espacio dedicado al almacenamiento?:</td>
                     <td>{{ $registro->est_almacenamiento }}</td>
                 </tr>
 
                 <tr>
-                    <td>Área exclusiva para preparación:</td>
+                    <td>¿La sede tiene un espacio dedicado a la preparación de alimentos (cocina)?:</td>
                     <td>{{ $registro->esp_preparacion }}</td>
                 </tr>
                 <tr>
-                    <td>Material techo (preparación):</td>
+                    <td>El material predominante del techo en ese lugar es (preparación):</td>
                     <td>{{ $registro->mat_techo_prep }}</td>
                 </tr>
                 <tr>
-                    <td>Material piso (preparación):</td>
+                    <td>El material predominante del piso en ese lugar es (preparación):</td>
                     <td>{{ $registro->mat_piso_prep }}</td>
                 </tr>
                 <tr>
-                    <td>Material paredes (preparación):</td>
+                    <td>El material predominante de las paredes en ese lugar es (preparación):</td>
                     <td>{{ $registro->mat_paredes_prep }}</td>
                 </tr>
                 <tr>
-                    <td>Estado general del área de preparación:</td>
+                    <td>¿En qué estado se encuentra el espacio dedicado a la preparación?:</td>
                     <td>{{ $registro->est_preparacion }}</td>
                 </tr>
 
                 <tr>
-                    <td>Área exclusiva para consumo (comedor):</td>
+                    <td>¿Cómo es el espacio que se utiliza para el consumo de alimentos?:</td>
                     <td>{{ $registro->esp_consumo }}</td>
                 </tr>
                 <tr>
-                    <td>Estado general del área de consumo:</td>
+                    <td>¿En qué estado se encuentra el espacio dedicado al consumo?:</td>
                     <td>{{ $registro->est_consumo }}</td>
                 </tr>
                 <tr>
-                    <td>Área para disposición de residuos:</td>
+                    <td>¿La sede tiene un espacio o área demarcada para la disposición de residuos?:</td>
                     <td>{{ $registro->area_residuos }}</td>
                 </tr>
                 <tr>
-                    <td>Baños para manipuladores de alimentos:</td>
+                    <td>¿La sede tiene baños de uso exclusivo para el personal manipulador de alimentos?:</td>
                     <td>{{ $registro->banos_manipuladores }}</td>
                 </tr>
 
@@ -206,43 +210,46 @@
                     <th colspan="2">3. SERVICIOS PÚBLICOS Y SANEAMIENTO</th>
                 </tr>
                 <tr>
-                    <td>Servicio de energía eléctrica:</td>
+                    <td>¿La sede cuenta con el servicio de electricidad?:</td>
                     <td>{{ $registro->electricidad }}</td>
                 </tr>
                 <tr>
-                    <td>Acceso a agua para preparación y limpieza:</td>
+                    <td>¿La sede cuenta con acceso a agua?:</td>
                     <td>{{ $registro->acceso_agua }}</td>
                 </tr>
                 <tr>
-                    <td>Fuente principal de agua de la sede:</td>
+                    <td>¿De dónde obtiene principalmente el agua para el PAE?:</td>
                     <td>{{ $registro->fuente_agua }}</td>
                 </tr>
                 <tr>
-                    <td>Sistema de alcantarillado o disposición de aguas residuales:</td>
+                    <td>¿La sede cuenta con el servicio de alcantarillado?:</td>
                     <td>{{ $registro->alcantarillado }}</td>
                 </tr>
                 <tr>
-                    <td>Tipo de combustible para preparación:</td>
+                    <td>¿Cuál de los siguientes combustibles se utilizan en la sede educativa para la preparación de
+                        los alimentos?:</td>
                     <td>{{ $registro->combustible }}</td>
                 </tr>
                 <tr>
-                    <td>Espacio adecuado para cilindros de gas:</td>
+                    <td>¿Cuenta con un espacio adecuado para almacenar la pipeta de gas?:</td>
                     <td>{{ $registro->espacio_gas }}</td>
                 </tr>
                 <tr>
-                    <td>Servicio regular de recolección de basura:</td>
+                    <td>¿La sede cuenta con el servicio de recolección de basuras (aseo)?:</td>
                     <td>{{ $registro->recoleccion_basura }}</td>
                 </tr>
                 <tr>
-                    <td>Manejo de residuos orgánicos:</td>
+                    <td>¿De qué forma se hace la disposición de residuos orgánicos (provenientes de la preparación
+                        de alimentos) del PAE en esta sede educativa?:</td>
                     <td>{{ $registro->disp_organicos }}</td>
                 </tr>
                 <tr>
-                    <td>Manejo de residuos no orgánicos:</td>
+                    <td>¿De qué forma se hace la disposición de residuos no orgánicos (envases de plástico, metal,
+                        vidrio, cartón, etc.) del PAE en esta sede educativa?:</td>
                     <td>{{ $registro->disp_no_organicos }}</td>
                 </tr>
                 <tr>
-                    <td>¿Se realiza clasificación de residuos en la sede?:</td>
+                    <td>¿Realizan algún tipo de clasificación de residuos sólidos?:</td>
                     <td>{{ $registro->clasi_residuos }}</td>
                 </tr>
 
@@ -250,104 +257,106 @@
                     <th colspan="2">4. EQUIPOS E INVENTARIO (ALMACENAMIENTO Y PREPARACIÓN)</th>
                 </tr>
                 <tr>
-                    <td>Cantidad de neveras:</td>
+                    <td>¿Cuántas neveras tiene?:</td>
                     <td>{{ $registro->cant_neveras }}</td>
                 </tr>
                 <tr>
-                    <td>¿Cuántas neveras están funcionando?:</td>
+                    <td>¿Cuántas de esas funcionan?:</td>
                     <td>{{ $registro->func_neveras }}</td>
                 </tr>
                 <tr>
-                    <td>Tamaño de la mayoría de neveras:</td>
+                    <td>¿Cuál de los siguientes tamaños corresponde a la mayoría de las neveras que funcionan?:</td>
                     <td>{{ $registro->tamano_neveras }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de congeladores:</td>
+                    <td>¿Cuántos congeladores tiene?:</td>
                     <td>{{ $registro->cant_conge }}</td>
                 </tr>
                 <tr>
-                    <td>¿Cuántos congeladores están funcionando?:</td>
+                    <td>¿Cuántos de estos funcionan?:</td>
                     <td>{{ $registro->func_conge }}</td>
                 </tr>
                 <tr>
-                    <td>Tamaño de la mayoría de congeladores:</td>
+                    <td>¿Cuál de los siguientes tamaños corresponde a la mayoría de los congeladores que funcionan?:
+                    </td>
                     <td>{{ $registro->tamano_conge }}</td>
                 </tr>
                 <tr>
-                    <td>¿Se almacenan los alimentos sobre estibas?:</td>
+                    <td>¿Almacena los alimentos en tarimas o estibas de tal forma que se encuentren elevados del
+                        suelo?:</td>
                     <td>{{ $registro->almacena_estibas }}</td>
                 </tr>
                 <tr>
-                    <td>Elementos de medición y control de almacenamiento:</td>
+                    <td>¿Qué elementos utiliza para el almacenamiento de los alimentos?:</td>
                     <td>{{ $registro->elementos_alm }}</td>
                 </tr>
 
                 <tr>
-                    <td>Cantidad de básculas:</td>
+                    <td>¿Cuántas básculas o pesos tiene (funcionales)?:</td>
                     <td>{{ $registro->cant_bas }}</td>
                 </tr>
                 <tr>
-                    <td>Capacidad de la(s) báscula(s):</td>
+                    <td>¿Cuánta es la capacidad de la báscula o el peso?:</td>
                     <td>{{ $registro->cap_bas }}</td>
                 </tr>
                 <tr>
-                    <td>Unidad de medida báscula(s):</td>
+                    <td>Unidad de medida del peso o de la báscula:</td>
                     <td>{{ $registro->uni_bas }}</td>
                 </tr>
                 <tr>
-                    <td>¿Termómetros en funcionamiento y calibrados?:</td>
+                    <td>¿La sede cuenta con termómetro funcionando exclusivo para el PAE?:</td>
                     <td>{{ $registro->term_fun }}</td>
                 </tr>
 
                 <tr>
-                    <td>Cantidad de ollas de presión:</td>
+                    <td>¿La sede cuenta con ollas a presión exclusivas para el uso del PAE?:</td>
                     <td>{{ $registro->ollas_pre }}</td>
                 </tr>
                 <tr>
-                    <td>Capacidad promedio de las ollas de presión (Lt):</td>
+                    <td>¿Las ollas a presión son de 4 Lt o 6 Lt?:</td>
                     <td>{{ $registro->cap_ollas_pre }}</td>
                 </tr>
                 <tr>
-                    <td>¿Cuántas funcionan correctamente?:</td>
+                    <td>¿Cuántas de estas ollas a presión funcionan?:</td>
                     <td>{{ $registro->ollas_pre_fun }}</td>
                 </tr>
 
                 <tr>
-                    <td>Cantidad de ralladores:</td>
+                    <td>Cantidad de Ralladores en buen estado:</td>
                     <td>{{ $registro->cant_ral }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de exprimidores:</td>
+                    <td>Cantidad de exprimidores en buen estado:</td>
                     <td>{{ $registro->cant_exp }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de tablas de picar:</td>
+                    <td>Cantidad de Tablas de Picar en buen estado (No de madera):</td>
                     <td>{{ $registro->cant_tab_pic }}</td>
                 </tr>
 
                 <tr>
-                    <td>Cantidad de estufas:</td>
+                    <td>¿Cuántas estufas tiene?:</td>
                     <td>{{ $registro->cant_estufas }}</td>
                 </tr>
                 <tr>
-                    <td>Total de quemadores (fogones):</td>
+                    <td>¿Cuántos quemadores o fogones tienen en total sus estufas?:</td>
                     <td>{{ $registro->total_quemadores }}</td>
                 </tr>
                 <tr>
-                    <td>¿Cuántos quemadores funcionan?:</td>
+                    <td>¿Cuántos de estos quemadores funcionan correctamente?:</td>
                     <td>{{ $registro->quemadores_fun }}</td>
                 </tr>
 
                 <tr>
-                    <td>Cantidad de licuadoras:</td>
+                    <td>¿Cuántas licuadoras tiene?:</td>
                     <td>{{ $registro->cant_lic }}</td>
                 </tr>
                 <tr>
-                    <td>¿Cuántas licuadoras están funcionando?:</td>
+                    <td>¿Cuántas de estas licuadoras funcionan?:</td>
                     <td>{{ $registro->lic_fun }}</td>
                 </tr>
                 <tr>
-                    <td>¿Cuántas licuadoras son industriales?:</td>
+                    <td>¿Cuántas de las licuadoras que funcionan son industriales?:</td>
                     <td>{{ $registro->lic_ind }}</td>
                 </tr>
 
@@ -355,68 +364,68 @@
                     <th colspan="2">5. DOTACIÓN GENERAL DE MENAJE</th>
                 </tr>
                 <tr>
-                    <td>Cantidad de ollas exclusivas para el PAE:</td>
+                    <td>¿La sede cuenta con ollas, olletas o pailas exclusivas para el PAE?:</td>
                     <td>{{ $registro->ollas_exc }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de ollas útiles:</td>
+                    <td>¿Cuántas ollas u olletas presentan buena vida útil?:</td>
                     <td>{{ $registro->ollas_util }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de pailas útiles:</td>
+                    <td>¿Cuántas pailas presentan buena vida útil?:</td>
                     <td>{{ $registro->pailas_util }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de calderos útiles:</td>
+                    <td>¿Cuántos calderos presentan buena vida útil?:</td>
                     <td>{{ $registro->calderos_util }}</td>
                 </tr>
                 <tr>
-                    <td>Tamaño predominante de calderos (Lt):</td>
+                    <td>¿Qué tamaño son los calderos arroceros?:</td>
                     <td>{{ $registro->tam_calderos }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de cuchillos exclusivos del PAE:</td>
+                    <td>¿La sede cuenta con cuchillos exclusivos para el uso del PAE?:</td>
                     <td>{{ $registro->cuch_exc }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de cuchillos útiles:</td>
+                    <td>¿Cuántos cuchillos presentan buena vida útil?:</td>
                     <td>{{ $registro->cuch_util }}</td>
                 </tr>
                 <tr>
-                    <td>Cucharas de servicio (soperas/arroz):</td>
+                    <td>¿La sede cuenta con cucharones y cucharas de servir exclusivas para el uso del PAE?:</td>
                     <td>{{ $registro->cuchara_serv }}</td>
                 </tr>
 
                 <tr>
-                    <td>Capacidad de atención simultánea (niños):</td>
+                    <td>De los niños que reciben PAE ¿Cuántos niños caben sentados al tiempo?:</td>
                     <td>{{ $registro->cap_ninos }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad total de platos:</td>
+                    <td>¿De cuántos platos dispone para el consumo de alimentos?:</td>
                     <td>{{ $registro->cant_platos }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de platos llanos:</td>
+                    <td>¿Cuántos de estos platos son llanos y se encuentran en buen estado?:</td>
                     <td>{{ $registro->pla_lla }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de platos hondos:</td>
+                    <td>¿Cuántos de estos platos son hondos y se encuentran en buen estado?:</td>
                     <td>{{ $registro->pla_hon }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de portas (bandejas/viandas):</td>
+                    <td>¿Con cuántos portas en buen estado cuentan para el consumo de alimentos?:</td>
                     <td>{{ $registro->portas }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de vasos:</td>
+                    <td>¿De cuántos pocillos o vasos en buen estado cuentan para el consumo de alimentos?:</td>
                     <td>{{ $registro->vasos }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de cucharas:</td>
+                    <td>¿De cuántas cucharas dispone para el consumo de alimentos?:</td>
                     <td>{{ $registro->cucharas }}</td>
                 </tr>
                 <tr>
-                    <td>Cantidad de tenedores:</td>
+                    <td>¿De cuántos tenedores dispone para el consumo de alimentos?:</td>
                     <td>{{ $registro->tenedores }}</td>
                 </tr>
 
@@ -424,19 +433,24 @@
                     <th colspan="2">6. SANEAMIENTO Y CONCLUSIÓN</th>
                 </tr>
                 <tr>
-                    <td>Recipientes para residuos (con tapa y pedal):</td>
+                    <td>¿Cuántos recipientes de material sanitario (canecas) con tapa y bolsa plástica tiene la
+                        sede?:</td>
                     <td>{{ $registro->recip_sani }}</td>
                 </tr>
                 <tr>
-                    <td>Baños exclusivos para manipuladoras de alimentos:</td>
+                    <td>¿Tiene batería sanitaria (tazas o inodoros) exclusivos para personal manipulador de
+                        alimentos?:</td>
                     <td>{{ $registro->banos_exc }}</td>
                 </tr>
                 <tr>
-                    <td>Lavamanos / puntos de desinfección para manipuladoras:</td>
+                    <td>¿Tiene lavamanos exclusivos para personal manipulador de alimentos?:</td>
                     <td>{{ $registro->lav_exc }}</td>
                 </tr>
                 <tr>
-                    <td><strong>MODELO DE ATENCIÓN PAE a implementar:</strong></td>
+                    <td><strong>MODELO DE ATENCIÓN PAE a implementar:</strong>De acuerdo al analisis del estado de las
+                        condiciones de infraestruuta, servicios publicos, dotacion y accesibilidad identificada en el
+                        presente diagnostico. Se detemina que el MODELO DE ATENCION PAE a implementar en esta SEDE
+                        EDUCATIVA es:</td>
                     <td><strong>{{ $registro->modelo_implementar }}</strong></td>
                 </tr>
             </tbody>
