@@ -239,13 +239,13 @@
                     <td>{{ $registro->recoleccion_basura }}</td>
                 </tr>
                 <tr>
-                    <td>¿De qué forma se hace la disposición de residuos orgánicos (provenientes de la preparación
+                    <td>¿De qué forma se hace la disposición de residuos orgánicos (provenientes de los restos
                         de alimentos) del PAE en esta sede educativa?:</td>
                     <td>{{ $registro->disp_organicos }}</td>
                 </tr>
                 <tr>
                     <td>¿De qué forma se hace la disposición de residuos no orgánicos (envases de plástico, metal,
-                        vidrio, cartón, etc.) del PAE en esta sede educativa?:</td>
+                        vidrio, papel, cartón, etc.) del PAE en esta sede educativa?:</td>
                     <td>{{ $registro->disp_no_organicos }}</td>
                 </tr>
                 <tr>
@@ -417,7 +417,7 @@
                     <td>{{ $registro->portas }}</td>
                 </tr>
                 <tr>
-                    <td>¿De cuántos pocillos o vasos en buen estado cuentan para el consumo de alimentos?:</td>
+                    <td>¿De cuántos pocillos o vasos dispone para el consumo de alimentos en buen estado?:</td>
                     <td>{{ $registro->vasos }}</td>
                 </tr>
                 <tr>
