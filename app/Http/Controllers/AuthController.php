@@ -44,6 +44,12 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if (!$user->is_active) {
+            return response()->json([
+                'message' => 'Tu cuenta está desactivada. Contacta al administrador.'
+            ], 403);
+        }
+
         // Crear token
         $token = $user->createToken('auth_token')->plainTextToken;
 

@@ -102,56 +102,75 @@ class UserController extends Controller
         ], 200);
     }
 
+    /**
+     * Restablecer contraseña: genera clave alfanumérica de 8 caracteres,
+     * revoca tokens y devuelve la nueva clave en la respuesta.
+     */
     public function resetPassword(Request $request, $id)
     {
         try {
-            // Buscar al usuario por ID
             $user = User::findOrFail($id);
 
-            // Generar una nueva contraseña
-            $newPassword = Str::random(10);
+            // Generar contraseña alfanumérica de 8 caracteres (sin caracteres ambiguos)
+            $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+            $newPassword = '';
+            for ($i = 0; $i < 8; $i++) {
+                $newPassword .= $chars[random_int(0, strlen($chars) - 1)];
+            }
 
-            // Actualizar la contraseña en la base de datos
+            // Guardar y revocar tokens
             $user->password = Hash::make($newPassword);
             $user->save();
+            $user->tokens()->delete();
 
-            // Enviar el correo con la nueva contraseña
-            Mail::send('emails.reset-password', ['user' => $user, 'password' => $newPassword], function ($message) use ($user) {
-                $message->to($user->email)
-                    ->subject('Restablecimiento de contraseña');
-            });
+            // Intentar enviar correo (no bloquea si falla)
+            try {
+                Mail::send('emails.reset-password', ['user' => $user, 'password' => $newPassword], function ($msg) use ($user) {
+                    $msg->to($user->email)->subject('Restablecimiento de contrasena');
+                });
+            } catch (\Exception $mailEx) {
+                // Fallo de correo no bloquea la respuesta
+            }
 
             return response()->json([
                 'success' => true,
-                'message' => 'La contraseña se ha restablecido y enviado por correo.',
+                'message' => 'Contrasena restablecida y sesiones cerradas.',
+                'new_password' => $newPassword,
             ], 200);
 
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'No se pudo restablecer la contraseña. Inténtelo de nuevo.',
+                'message' => 'No se pudo restablecer la contrasena.',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
 
+    /**
+     * Activar o desactivar usuario. Al desactivar, revoca todos sus tokens.
+     */
     public function toggleActive($id)
     {
         try {
-            // Buscar al usuario por ID
             $user = User::findOrFail($id);
 
-            // Cambiar el estado del usuario
             $user->is_active = !$user->is_active;
             $user->save();
 
+            // Revocar tokens al desactivar
+            if (!$user->is_active) {
+                $user->tokens()->delete();
+            }
+
             $message = $user->is_active
-                ? 'El usuario ha sido habilitado.'
-                : 'El usuario ha sido deshabilitado.';
+                ? 'El usuario ha sido activado.'
+                : 'El usuario ha sido desactivado y sus sesiones cerradas.';
 
             return response()->json([
                 'success' => true,
                 'message' => $message,
+                'is_active' => $user->is_active,
             ], 200);
 
         } catch (\Exception $e) {
@@ -162,5 +181,4 @@ class UserController extends Controller
             ], 500);
         }
     }
-
 }
