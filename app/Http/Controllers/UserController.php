@@ -30,19 +30,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'tipo_documento' => 'required|string|max:255',
-            'num_documento' => 'required|string|unique:users,num_documento',
+            'tipo_documento' => 'required|in:CC,PAS,PEP,DE,CE',
+            'num_documento' => 'required|digits_between:4,20|unique:users,num_documento',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'email.required' => 'El correo es obligatorio.',
+            'email.email' => 'El correo no tiene un formato valido.',
+            'email.unique' => 'Ya existe un usuario con ese correo.',
+            'tipo_documento.required' => 'Seleccione el tipo de documento.',
+            'tipo_documento.in' => 'El tipo de documento no es valido.',
+            'num_documento.required' => 'El numero de documento es obligatorio.',
+            'num_documento.digits_between' => 'El numero de documento debe tener entre 4 y 20 digitos.',
+            'num_documento.unique' => 'Ya existe un usuario con ese numero de documento.',
         ]);
 
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'tipo_documento' => $validatedData['tipo_documento'],
-            'num_documento' => $validatedData['num_documento'],
-            'password' => Hash::make($validatedData['num_documento']),
+            'name' => $request->name,
+            'email' => $request->email,
+            'tipo_documento' => $request->tipo_documento,
+            'num_documento' => $request->num_documento,
+            'password' => Hash::make($request->num_documento),
             'chk_social' => $request->chk_social ?? false,
             'chk_reportes' => $request->chk_reportes ?? false,
             'chk_usuarios' => $request->chk_usuarios ?? false,
@@ -63,18 +73,28 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'tipo_documento' => 'required|string|max:255',
-            'num_documento' => 'required|string|unique:users,num_documento,' . $user->id,
+            'tipo_documento' => 'required|in:CC,PAS,PEP,DE,CE',
+            'num_documento' => 'required|digits_between:4,20|unique:users,num_documento,' . $user->id,
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'email.required' => 'El correo es obligatorio.',
+            'email.email' => 'El correo no tiene un formato valido.',
+            'email.unique' => 'Ya existe un usuario con ese correo.',
+            'tipo_documento.required' => 'Seleccione el tipo de documento.',
+            'tipo_documento.in' => 'El tipo de documento no es valido.',
+            'num_documento.required' => 'El numero de documento es obligatorio.',
+            'num_documento.digits_between' => 'El numero de documento debe tener entre 4 y 20 digitos.',
+            'num_documento.unique' => 'Ya existe un usuario con ese numero de documento.',
         ]);
 
         $user->update([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'tipo_documento' => $validatedData['tipo_documento'],
-            'num_documento' => $validatedData['num_documento'],
+            'name' => $request->name,
+            'email' => $request->email,
+            'tipo_documento' => $request->tipo_documento,
+            'num_documento' => $request->num_documento,
             'chk_social' => $request->chk_social ?? false,
             'chk_reportes' => $request->chk_reportes ?? false,
             'chk_usuarios' => $request->chk_usuarios ?? false,
