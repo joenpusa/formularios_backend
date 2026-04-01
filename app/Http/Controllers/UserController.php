@@ -44,13 +44,11 @@ class UserController extends Controller
             'num_documento' => $validatedData['num_documento'],
             'password' => Hash::make($validatedData['num_documento']),
             'chk_social' => $request->chk_social ?? false,
-            'chk_social_all' => $request->chk_social_all ?? false,
             'chk_reportes' => $request->chk_reportes ?? false,
-            'chk_reportes_all' => $request->chk_reportes_all ?? false,
             'chk_usuarios' => $request->chk_usuarios ?? false,
             'chk_tecnico' => $request->chk_tecnico ?? false,
-            'chk_tecnico_all' => $request->chk_tecnico_all ?? false,
             'chk_galeria' => $request->chk_galeria ?? false,
+            'chk_diagnosticos' => $request->chk_diagnosticos ?? false,
         ]);
 
         return response()->json([
@@ -78,13 +76,11 @@ class UserController extends Controller
             'tipo_documento' => $validatedData['tipo_documento'],
             'num_documento' => $validatedData['num_documento'],
             'chk_social' => $request->chk_social ?? false,
-            'chk_social_all' => $request->chk_social_all ?? false,
             'chk_reportes' => $request->chk_reportes ?? false,
-            'chk_reportes_all' => $request->chk_reportes_all ?? false,
             'chk_usuarios' => $request->chk_usuarios ?? false,
             'chk_tecnico' => $request->chk_tecnico ?? false,
-            'chk_tecnico_all' => $request->chk_tecnico_all ?? false,
             'chk_galeria' => $request->chk_galeria ?? false,
+            'chk_diagnosticos' => $request->chk_diagnosticos ?? false,
         ]);
 
         return response()->json([

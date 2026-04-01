@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'Credenciales incorrectas'
             ], 401);
@@ -50,6 +50,18 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'user' => [
+                'name' => $user->name,
+                'email' => $user->email,
+            ],
+            'permisos' => [
+                'chk_social' => (bool) $user->chk_social,
+                'chk_tecnico' => (bool) $user->chk_tecnico,
+                'chk_reportes' => (bool) $user->chk_reportes,
+                'chk_usuarios' => (bool) $user->chk_usuarios,
+                'chk_galeria' => (bool) $user->chk_galeria,
+                'chk_diagnosticos' => (bool) $user->chk_diagnosticos,
+            ],
         ]);
     }
 
