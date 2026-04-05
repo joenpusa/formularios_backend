@@ -63,7 +63,7 @@
                     <td><strong>CÓDIGO:</strong> F-DIAG-01</td>
                 </tr>
                 <tr>
-                    <td><strong>VIGENTE DESDE:</strong> ENERO 2025</td>
+                    <td><strong>VIGENTE DESDE:</strong> ENERO 2026</td>
                 </tr>
             </tbody>
         </table>
