@@ -588,6 +588,81 @@ class ReporteController extends Controller
         }
     }
 
+    public function eliminar(Request $request)
+    {
+        try {
+            $user = $request->user();
+            if (!in_array($user->email, ['joenpusa@gmail.com', 'tic@nortedesantander.gov.co', 'apoyo.ejecalidad@gmail.com', 'gestionsocialpaends@gmail.com'])) {
+                return response()->json(['message' => 'No autorizado para eliminar registros'], 403);
+            }
+
+            $request->validate([
+                'tipo_reporte' => 'required|string',
+                'id' => 'required|integer'
+            ]);
+
+            $tipoReporte = $request->input('tipo_reporte');
+            $id = $request->input('id');
+
+            $modelos = [
+                'ct_seguimiento_rotulado' => CtSeguimientoRotulado::class,
+                'ct_etapa_alistamiento' => CtEtapaAlistamiento::class,
+                'ct_verificacion_materia_prima' => CtVerificacionMateriaPrima::class,
+                'ct_verificacion_modalidad_rps' => CtVerificacionModalidadRps::class,
+                'ct_verificacion_rotulado_ri' => CtVerificacionRotuladoRi::class,
+                'ct_verificacion_modalidad_ri' => CtVerificacionModalidadRi::class,
+                'pqr' => Pqr::class,
+                'social_visitas' => SocialVisita::class,
+                'social_asistencias' => SocialAsistencia::class,
+                'social_verificaciones' => SocialVerificacion::class,
+                'ct_verificacion_materia_prima_ps' => CtVerificacionMateriaPrimaPs::class,
+                'ct_verificacion_cct' => CtVerificacionCct::class,
+                'ct_seguimiento_etiquetados' => CtSeguimientoEtiquetado::class,
+                'ct_caracteristicas_productos' => CtCaracteristicasProducto::class,
+                'ct_toma_muestras' => CtTomaMuestra::class,
+                'ct_etapa_operaciones' => CtEtapaOperacion::class,
+                'ct_seguimiento_locales' => CtSeguimientoLocal::class,
+                'diagnosticos' => Diagnostico::class,
+            ];
+
+            if (!array_key_exists($tipoReporte, $modelos)) {
+                return response()->json(['message' => 'Tipo de reporte inválido'], 400);
+            }
+
+            $modelo = $modelos[$tipoReporte];
+            $registro = $modelo::find($id);
+
+            if (!$registro) {
+                return response()->json(['message' => 'Registro no encontrado'], 404);
+            }
+
+            // Eliminar imágenes asociadas
+            $formNameSearch = ($tipoReporte === 'diagnosticos') ? 'diagnostico' : $tipoReporte;
+            $imagenes = Attachment::where('form_name', $formNameSearch)
+                ->where('form_id', $id)
+                ->get();
+
+            foreach ($imagenes as $imagen) {
+                $path = storage_path('app/public/' . $imagen->file_path);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+                $imagen->delete();
+            }
+
+            // Eliminar el registro
+            $registro->delete();
+
+            return response()->json(['message' => 'Registro eliminado exitosamente'], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error al eliminar el registro',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     private function getData($tipo)
     {
         // switch ($tipo) {
