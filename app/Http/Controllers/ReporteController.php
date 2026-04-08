@@ -53,6 +53,7 @@ class ReporteController extends Controller
         $query1 = SocialVisita::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'social_visitas.fechaVisita as fecha_visita',
             'social_visitas.id',
@@ -61,6 +62,7 @@ class ReporteController extends Controller
             ->join('municipios', 'social_visitas.municipio', '=', 'municipios.id')
             ->join('instituciones', 'social_visitas.institucion', '=', 'instituciones.id')
             ->join('users', 'social_visitas.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'social_visitas.sede', '=', 'sedes.id')
             ->whereBetween('social_visitas.fechaVisita', [$fechaInicio, $fechaFin]);
 
         // Aplicar filtros opcionales
@@ -75,6 +77,7 @@ class ReporteController extends Controller
         $query2 = SocialVerificacion::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            DB::raw('"" as sede'),
             'users.name as creado_por',
             'social_verificaciones.fecha_visita',
             'social_verificaciones.id',
@@ -97,6 +100,7 @@ class ReporteController extends Controller
         $query3 = SocialAsistencia::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'social_asistencias.fecha_visita',
             'social_asistencias.id',
@@ -106,6 +110,7 @@ class ReporteController extends Controller
             ->join('municipios', 'social_asistencias.municipio', '=', 'municipios.id')
             ->join('instituciones', 'social_asistencias.institucion', '=', 'instituciones.id')
             ->join('users', 'social_asistencias.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'social_asistencias.sede', '=', 'sedes.id')
             ->whereBetween('social_asistencias.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query2);
 
@@ -119,6 +124,7 @@ class ReporteController extends Controller
         $query4 = CtVerificacionMateriaPrima::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_verificacion_materia_prima.fecha_visita',
             'ct_verificacion_materia_prima.id',
@@ -128,6 +134,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_verificacion_materia_prima.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_verificacion_materia_prima.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_verificacion_materia_prima.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_verificacion_materia_prima.sede', '=', 'sedes.id')
             ->whereBetween('ct_verificacion_materia_prima.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query3);
 
@@ -141,6 +148,7 @@ class ReporteController extends Controller
         $query5 = CtVerificacionMateriaPrimaPs::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_verificacion_materia_prima_ps.fecha_visita',
             'ct_verificacion_materia_prima_ps.id',
@@ -150,6 +158,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_verificacion_materia_prima_ps.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_verificacion_materia_prima_ps.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_verificacion_materia_prima_ps.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_verificacion_materia_prima_ps.sede', '=', 'sedes.id')
             ->whereBetween('ct_verificacion_materia_prima_ps.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query4);
 
@@ -163,6 +172,7 @@ class ReporteController extends Controller
         $query6 = CtVerificacionCct::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_verificacion_cct.fecha_visita',
             'ct_verificacion_cct.id',
@@ -172,6 +182,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_verificacion_cct.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_verificacion_cct.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_verificacion_cct.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_verificacion_cct.sede', '=', 'sedes.id')
             ->whereBetween('ct_verificacion_cct.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query5);
 
@@ -185,6 +196,7 @@ class ReporteController extends Controller
         $query7 = CtVerificacionModalidadRps::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_verificacion_modalidad_rps.fecha_visita',
             'ct_verificacion_modalidad_rps.id',
@@ -194,6 +206,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_verificacion_modalidad_rps.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_verificacion_modalidad_rps.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_verificacion_modalidad_rps.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_verificacion_modalidad_rps.sede', '=', 'sedes.id')
             ->whereBetween('ct_verificacion_modalidad_rps.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query6);
 
@@ -207,6 +220,7 @@ class ReporteController extends Controller
         $query8 = CtVerificacionRotuladoRi::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_verificacion_rotulado_ri.fecha_visita',
             'ct_verificacion_rotulado_ri.id',
@@ -216,6 +230,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_verificacion_rotulado_ri.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_verificacion_rotulado_ri.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_verificacion_rotulado_ri.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_verificacion_rotulado_ri.sede', '=', 'sedes.id')
             ->whereBetween('ct_verificacion_rotulado_ri.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query7);
 
@@ -229,6 +244,7 @@ class ReporteController extends Controller
         $query9 = CtVerificacionModalidadRi::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_verificacion_modalidad_ri.fecha_visita',
             'ct_verificacion_modalidad_ri.id',
@@ -238,6 +254,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_verificacion_modalidad_ri.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_verificacion_modalidad_ri.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_verificacion_modalidad_ri.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_verificacion_modalidad_ri.sede', '=', 'sedes.id')
             ->whereBetween('ct_verificacion_modalidad_ri.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query8);
 
@@ -251,6 +268,7 @@ class ReporteController extends Controller
         $query10 = CtSeguimientoEtiquetado::select(
             'municipios.nombre as municipio',
             DB::raw('"NO APLICA" as institucion'),
+            DB::raw('"" as sede'),
             'users.name as creado_por',
             'ct_seguimiento_etiquetados.fecha_visita',
             'ct_seguimiento_etiquetados.id',
@@ -272,6 +290,7 @@ class ReporteController extends Controller
         $query11 = CtCaracteristicasProducto::select(
             'municipios.nombre as municipio',
             DB::raw('"NO APLICA" as institucion'),
+            DB::raw('"" as sede'),
             'users.name as creado_por',
             'ct_caracteristicas_productos.fecha_visita',
             'ct_caracteristicas_productos.id',
@@ -293,6 +312,7 @@ class ReporteController extends Controller
         $query12 = CtTomaMuestra::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            DB::raw('"" as sede'),
             'users.name as creado_por',
             'ct_toma_muestras.fecha_visita',
             'ct_toma_muestras.id',
@@ -315,6 +335,7 @@ class ReporteController extends Controller
         $query13 = CtEtapaAlistamiento::select(
             'municipios.nombre as municipio',
             DB::raw('"NO APLICA" as institucion'),
+            DB::raw('"" as sede'),
             'users.name as creado_por',
             'ct_etapa_alistamiento.fecha_visita',
             'ct_etapa_alistamiento.id',
@@ -336,6 +357,7 @@ class ReporteController extends Controller
         $query14 = CtEtapaOperacion::select(
             'municipios.nombre as municipio',
             DB::raw('"NO APLICA" as institucion'),
+            DB::raw('"" as sede'),
             'users.name as creado_por',
             'ct_etapa_operaciones.fecha_visita',
             'ct_etapa_operaciones.id',
@@ -357,6 +379,7 @@ class ReporteController extends Controller
         $query15 = CtSeguimientoLocal::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_seguimiento_locales.fecha_visita',
             'ct_seguimiento_locales.id',
@@ -366,6 +389,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_seguimiento_locales.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_seguimiento_locales.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_seguimiento_locales.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_seguimiento_locales.sede', '=', 'sedes.id')
             ->whereBetween('ct_seguimiento_locales.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query14);
 
@@ -379,6 +403,7 @@ class ReporteController extends Controller
         $query16 = CtSeguimientoRotulado::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'ct_seguimiento_rotulado.fecha_visita',
             'ct_seguimiento_rotulado.id',
@@ -388,6 +413,7 @@ class ReporteController extends Controller
             ->join('municipios', 'ct_seguimiento_rotulado.municipio', '=', 'municipios.id')
             ->join('instituciones', 'ct_seguimiento_rotulado.institucion', '=', 'instituciones.id')
             ->join('users', 'ct_seguimiento_rotulado.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'ct_seguimiento_rotulado.sede', '=', 'sedes.id')
             ->whereBetween('ct_seguimiento_rotulado.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query15);
 
@@ -401,6 +427,7 @@ class ReporteController extends Controller
         $query17 = Diagnostico::select(
             'municipios.nombre as municipio',
             'instituciones.nombre as institucion',
+            'sedes.nombre as sede',
             'users.name as creado_por',
             'diagnosticos.fecha_visita',
             'diagnosticos.id',
@@ -410,6 +437,7 @@ class ReporteController extends Controller
             ->leftJoin('municipios', 'diagnosticos.municipio', '=', 'municipios.id')
             ->leftJoin('instituciones', 'diagnosticos.institucion', '=', 'instituciones.id')
             ->leftJoin('users', 'diagnosticos.created_by', '=', 'users.id')
+            ->leftJoin('sedes', 'diagnosticos.sede', '=', 'sedes.id')
             ->whereBetween('diagnosticos.fecha_visita', [$fechaInicio, $fechaFin])
             ->union($query16);
 
