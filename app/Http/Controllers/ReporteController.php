@@ -554,7 +554,7 @@ class ReporteController extends Controller
                 ], 404);
             }
 
-            //agrgar las imagenes que cargaron
+            // Agregar las imagenes que cargaron
             $formNameSearch = ($tipoReporte === 'diagnosticos') ? 'diagnostico' : $tipoReporte;
             $imagenes = Attachment::where('form_name', $formNameSearch)
                 ->where('form_id', $id)
@@ -562,12 +562,45 @@ class ReporteController extends Controller
                 ->map(function ($archivo) {
                     $path = storage_path('app/public/' . $archivo->file_path);
                     if (file_exists($path)) {
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $data = file_get_contents($path);
-                        return 'data:image/' . $type . ';base64,' . base64_encode($data);
+                        try {
+                            // Validar la imagen usando getimagesize para evitar errores posteriores en DOMPDF.
+                            // Si la imagen está corrupta, Laravel convertirá el E_WARNING en una excepción.
+                            $info = getimagesize($path);
+                            if ($info !== false) {
+                                $type = pathinfo($path, PATHINFO_EXTENSION);
+                                $data = file_get_contents($path);
+                                return 'data:image/' . $type . ';base64,' . base64_encode($data);
+                            }
+                        } catch (\Throwable $th) {
+                            // Omitir la imagen
+                            return null;
+                        }
                     }
                     return null;
                 })->filter();
+
+            // Validar las firmas base64 por si también están corruptas
+            $validarFirma = function ($base64) {
+                if (!$base64)
+                    return null;
+                try {
+                    $data = preg_replace('#^data:image/[^;]+;base64,#', '', $base64);
+                    $decoded = base64_decode($data);
+                    if ($decoded) {
+                        $info = getimagesizefromstring($decoded);
+                        if ($info !== false) {
+                            return $base64;
+                        }
+                    }
+                } catch (\Throwable $th) {
+                    return null;
+                }
+                return null;
+            };
+
+            $registro->firma1 = $validarFirma($registro->firma1);
+            $registro->firma2 = $validarFirma($registro->firma2);
+
             // Seleccionar la vista según el tipo de reporte
             $vista = "export.{$tipoReporte}_pdf";
 

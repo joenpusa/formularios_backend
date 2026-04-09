@@ -464,10 +464,20 @@
                     <th style="width: 50%;">FIRMA QUIEN ATIENDE LA VISITA</th>
                 </tr>
                 <tr>
-                    <td style="text-align: center;"><img src="{{ $registro->firma1 }}"
-                            style="width: 150px; padding: 5px" /></td>
-                    <td style="text-align: center;"><img src="{{ $registro->firma2 }}"
-                            style="width: 150px; padding: 5px" /></td>
+                    <td style="text-align: center;">
+                        @if(!empty($registro->firma1))
+                            <img src="{{ $registro->firma1 }}" style="width: 150px; padding: 5px" />
+                        @else
+                            <span style="color: gray; font-style: italic;">Firma no disponible o corrupta</span>
+                        @endif
+                    </td>
+                    <td style="text-align: center;">
+                        @if(!empty($registro->firma2))
+                            <img src="{{ $registro->firma2 }}" style="width: 150px; padding: 5px" />
+                        @else
+                            <span style="color: gray; font-style: italic;">Firma no disponible o corrupta</span>
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>NOMBRE: <strong>{{ $registro->nombre_apoyo }}</strong></td>
